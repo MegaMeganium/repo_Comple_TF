@@ -1,0 +1,375 @@
+  Bomberman.WinForm.resources - Embedded, ContainedInManifestFile, 
+ImageRuntimeVersion: v4.0.30319
+Assembly Bomberman, Version=0.0.*, Culture=Todos los idiomas (todos los países): 
+	hash=SHA1, flags=PublicKey
+Assembly mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a: 
+	hash=None, flags=None
+Assembly System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Class Bomberman.Posicion: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(Int32, Int32, Int32): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Int32, Int32): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    Int32 x : Public
+    Int32 y : Public
+  Methods:
+    EsIgualA(Posicion): PrivateScope, Public, HideBySig
+    Igualar(Int32, Int32, Int32): PrivateScope, Public, HideBySig
+    Igualar(Posicion): PrivateScope, Public, HideBySig
+    Aumentar(Direcciones, Int32): PrivateScope, Public, HideBySig
+    ToZero(): PrivateScope, Public, HideBySig
+    getBody(Int32, Int32): PrivateScope, Public, HideBySig
+    getIncrementada(Direcciones, Int32): PrivateScope, Public, HideBySig
+Class Bomberman.Figura: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.Drawing.Image imagen : Public
+    Bomberman.Posicion posicion : Public
+    Int32 alto : Public
+    Int32 ancho : Public
+    Int32 indiceSprite : Public
+    Int32 subIndice : Public
+  Methods:
+    getBody(Int32, Int32, Int32, Int32): PrivateScope, Public, Static, HideBySig
+    getBody(): PrivateScope, Public, HideBySig
+Class Bomberman.Vivo: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Bomberman.Figura
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    Int32 vida : Public
+    Int32 tiempoInmortal : Public
+    System.Action EsAtacado : Public
+    Bomberman.Estados estado : Public
+    Bomberman.Direcciones direccion : Public
+    Int32 velocidad : Public
+Class Bomberman.Upecino: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Bomberman.Vivo
+    Void .ctor(Bomberman.Posicion): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    Int32 contadorBombas : Public, Static
+    Int32 radioExplosion : Public, Static
+    Boolean moviendose : Public, Static
+  Methods:
+    TocaElPortal(): PrivateScope, Public, Static, HideBySig
+    MostrarUpecino(Graphics): PrivateScope, Public, HideBySig
+    PierdeUnaVida(): PrivateScope, Public, HideBySig
+    AnimacionMuerte(): PrivateScope, Public, HideBySig
+    Avanzar(Direcciones): PrivateScope, Public, HideBySig
+    Detener(): PrivateScope, Public, HideBySig
+Class Bomberman.Maligno: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Bomberman.Vivo
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    Bomberman.Malignos tipo : Public
+    Boolean visible : Public
+  Methods:
+    ColisionMaligno_Fuego(Int32, Int32): PrivateScope, Public, Static, HideBySig
+Class Bomberman.Maligno1: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Bomberman.Maligno
+    Void .ctor(Bomberman.Posicion, Int32): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    Int32 contador : Public
+  Methods:
+    MostrarSprite(Graphics): PrivateScope, Public, HideBySig
+    Muere(): PrivateScope, Public, HideBySig
+    Avanzar(): PrivateScope, Public, HideBySig
+Class Bomberman.Maligno2: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Bomberman.Maligno
+    Void .ctor(Bomberman.Posicion, Bomberman.Direcciones, Int32): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    MostrarSprite(Graphics): PrivateScope, Public, HideBySig
+    Muere(): PrivateScope, Public, HideBySig
+    Avanzar(): PrivateScope, Public, HideBySig
+    CambiarDeDireccion(): PrivateScope, Public, HideBySig
+Class Bomberman.Maligno3: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Bomberman.Maligno
+    Void .ctor(Bomberman.Posicion, Int32): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    MostrarSprite(Graphics): PrivateScope, Public, HideBySig
+    Muere(): PrivateScope, Public, HideBySig
+    Avanzar(): PrivateScope, Public, HideBySig
+    CambiarDeDireccion(): PrivateScope, Public, HideBySig
+Class Bomberman.Maligno4: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Bomberman.Maligno
+    Void .ctor(Bomberman.Posicion, Int32): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    MostrarSprite(Graphics): PrivateScope, Public, HideBySig
+    Muere(): PrivateScope, Public, HideBySig
+    Avanzar(): PrivateScope, Public, HideBySig
+    CambiarDeDireccion(): PrivateScope, Public, HideBySig
+Class Bomberman.Objeto: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Bomberman.Figura
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    Bomberman.Objetos tipo : Public
+  Methods:
+    getObjetoColisionante(Direcciones, Int32, Posicion): PrivateScope, Public, Static, HideBySig
+    getObjeto(Posicion): PrivateScope, Public, Static, HideBySig
+Class Bomberman.Piso: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Bomberman.Objeto
+    Void .ctor(Bomberman.Posicion): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    MostrarSprite(Graphics): PrivateScope, Public, HideBySig
+Class Bomberman.Caja: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Bomberman.Objeto
+    Void .ctor(Bomberman.Posicion): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    cuandoBombaLeCae(): PrivateScope, Public, HideBySig
+    MostrarSprite(Graphics): PrivateScope, Public, HideBySig
+    getContenidoCaja(Posicion): PrivateScope, Public, Static, HideBySig
+Class Bomberman.Bloque: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Bomberman.Objeto
+    Void .ctor(Bomberman.Posicion): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    MostrarSprite(Graphics): PrivateScope, Public, HideBySig
+Class Bomberman.Item: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Bomberman.Objeto
+    Void .ctor(Bomberman.Posicion, Bomberman.Items): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    Bomberman.Items tipoItem : Public
+  Methods:
+    MostrarSprite(Graphics): PrivateScope, Public, HideBySig
+Class Bomberman.Bomba: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Bomberman.Objeto
+    Void .ctor(Bomberman.Posicion): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    Int32 tiempo : Public
+    Boolean visible : Public
+    Int32 radioExplosion : Public
+  Methods:
+    Explotar(Graphics): PrivateScope, Public, HideBySig
+    MostrarSprite(Graphics): PrivateScope, Public, HideBySig
+Class Bomberman.Portal: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Bomberman.Objeto
+    Void .ctor(Bomberman.Posicion): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    Boolean visible : Public, Static
+  Methods:
+    MostrarSprite(Graphics): PrivateScope, Public, HideBySig
+Class Bomberman.MatrizObjetos: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    Bomberman.Objeto[,] matriz : Public
+Class Bomberman.ArrBombas: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    Bomberman.Bomba[] arreglo : Public
+    Int32 cantidad : Public
+  Methods:
+    CrearArreglo(Int32): PrivateScope, Public, Static, HideBySig
+    getBomba(Int32, Int32): PrivateScope, Public, HideBySig
+    AgregarBomba(Bomba): PrivateScope, Public, HideBySig
+    MostrarBombas(Graphics): PrivateScope, Public, HideBySig
+    CorrerBombas(): PrivateScope, Public, HideBySig
+    LimpiarArreglo(): PrivateScope, Public, HideBySig
+Class Bomberman.ArrMalignos: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(Int32): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    Bomberman.Maligno[] arreglo : Public
+    Int32 cantidad : Public
+    Int32 malignosRestantes : Public
+  Methods:
+    EliminarMaligno(Maligno): PrivateScope, Public, HideBySig
+    MostrarMalignos(Graphics): PrivateScope, Public, HideBySig
+Class Bomberman.Nivel: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    Bomberman.MatrizObjetos matrizObjetos : Public
+    Bomberman.ArrMalignos arregloMalignos : Public
+  Methods:
+    generarMatrizObjetos($ArrayType$$$BY0N@W4Objetos@Bomberman@@* IsConst IsConst): PrivateScope, Public, HideBySig
+    PasarANivel(Int32): PrivateScope, Public, Static, HideBySig
+    MostrarNivel(Graphics): PrivateScope, Public, Static, HideBySig
+Class Bomberman.Nivel1: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Bomberman.Nivel
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class Bomberman.Nivel2: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Bomberman.Nivel
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class Bomberman.Nivel3: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Bomberman.Nivel
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class Bomberman.Nivel4: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Bomberman.Nivel
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class Bomberman.Nivel5: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Bomberman.Nivel
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class Bomberman.Escena: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    Int32 contador : Public
+    Boolean activo : Public
+    Boolean dibujado : Public
+    System.Drawing.BufferedGraphics buffer : Public
+    System.Windows.Forms.KeyEventHandler onKeyDown : Public
+    System.Windows.Forms.KeyEventHandler onKeyUp : Public
+    System.Windows.Forms.MouseEventHandler onMouseClick : Public
+    System.EventHandler onTimerTick : Public
+  Methods:
+    CambiarEscena(Escena): PrivateScope, Public, Static, HideBySig
+    ActivarEscena(Escena): PrivateScope, Public, Static, HideBySig
+    DesactivarEscena(Escena): PrivateScope, Public, Static, HideBySig
+Class Bomberman.Introduccion: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Bomberman.Escena
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    timerTick(Object, EventArgs): PrivateScope, Public, HideBySig
+    teclaDown(Object, KeyEventArgs): PrivateScope, Public, HideBySig
+Class Bomberman.Inicio: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Bomberman.Escena
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.String opcion : Public
+  Methods:
+    timerTick(Object, EventArgs): PrivateScope, Public, HideBySig
+    teclaDown(Object, KeyEventArgs): PrivateScope, Public, HideBySig
+Class Bomberman.Instrucciones: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Bomberman.Escena
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    timerTick(Object, EventArgs): PrivateScope, Public, HideBySig
+    teclaDown(Object, KeyEventArgs): PrivateScope, Public, HideBySig
+Class Bomberman.Pausa: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Bomberman.Escena
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.String opcion : Public
+  Methods:
+    timerTick(Object, EventArgs): PrivateScope, Public, HideBySig
+    teclaDown(Object, KeyEventArgs): PrivateScope, Public, HideBySig
+Class Bomberman.YouWin: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Bomberman.Escena
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    timerTick(Object, EventArgs): PrivateScope, Public, HideBySig
+    teclaDown(Object, KeyEventArgs): PrivateScope, Public, HideBySig
+Class Bomberman.GameOver: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Bomberman.Escena
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    timerTick(Object, EventArgs): PrivateScope, Public, HideBySig
+    teclaDown(Object, KeyEventArgs): PrivateScope, Public, HideBySig
+Class Bomberman.Congratulations: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Bomberman.Escena
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    timerTick(Object, EventArgs): PrivateScope, Public, HideBySig
+    teclaDown(Object, KeyEventArgs): PrivateScope, Public, HideBySig
+Class Bomberman.Creditos: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Bomberman.Escena
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    timerTick(Object, EventArgs): PrivateScope, Public, HideBySig
+    teclaDown(Object, KeyEventArgs): PrivateScope, Public, HideBySig
+Class Bomberman.Juego: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :Bomberman.Escena
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    SByte cheatKey IsSignUnspecifiedByte : Public
+    Int32 nivel : Public
+  Methods:
+    GanarJuego(): PrivateScope, Public, Static, HideBySig
+    PerderJuego(): PrivateScope, Public, Static, HideBySig
+    mouseClick(Object, MouseEventArgs): PrivateScope, Public, HideBySig
+    timerTick(Object, EventArgs): PrivateScope, Public, HideBySig
+    teclaDown(Object, KeyEventArgs): PrivateScope, Public, HideBySig
+    teclaUp(Object, KeyEventArgs): PrivateScope, Public, HideBySig
+Class Bomberman.Imagenes: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.Drawing.Image BombermanSprite : Public, Static
+    System.Drawing.Image BomberdogSprite : Public, Static
+    System.Drawing.Image PirateBombermanSprite : Public, Static
+    System.Drawing.Image NinjaBombermanSprite : Public, Static
+    System.Drawing.Image PlunderBombermanSprite : Public, Static
+    System.Drawing.Image TerroinSprite : Public, Static
+    System.Drawing.Image CapedBombermanSprite : Public, Static
+    System.Drawing.Image BombasSprite : Public, Static
+    System.Drawing.Image BombaPlus : Public, Static
+    System.Drawing.Image Cura : Public, Static
+    System.Drawing.Image PasaMuros : Public, Static
+    System.Drawing.Image Powerade : Public, Static
+    System.Drawing.Image Cursor : Public, Static
+    System.Drawing.Image Portal : Public, Static
+    System.Drawing.Image Bloque1 : Public, Static
+    System.Drawing.Image Bloque2 : Public, Static
+    System.Drawing.Image Bloque3 : Public, Static
+    System.Drawing.Image Bloque4 : Public, Static
+    System.Drawing.Image Bloque5 : Public, Static
+    System.Drawing.Image Caja1 : Public, Static
+    System.Drawing.Image Caja2 : Public, Static
+    System.Drawing.Image Caja3 : Public, Static
+    System.Drawing.Image Caja4 : Public, Static
+    System.Drawing.Image Caja5 : Public, Static
+    System.Drawing.Image Piso1 : Public, Static
+    System.Drawing.Image Piso2 : Public, Static
+    System.Drawing.Image Piso3 : Public, Static
+    System.Drawing.Image Piso4 : Public, Static
+    System.Drawing.Image Piso5 : Public, Static
+    System.Drawing.Image Introducion : Public, Static
+    System.Drawing.Image Inicio : Public, Static
+    System.Drawing.Image Instrucciones : Public, Static
+    System.Drawing.Image Juego : Public, Static
+    System.Drawing.Image Pausa : Public, Static
+    System.Drawing.Image YouWin : Public, Static
+    System.Drawing.Image Congratulations : Public, Static
+    System.Drawing.Image GameOver : Public, Static
+    System.Drawing.Image Creditos : Public, Static
+Class Bomberman.Winform: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.Form
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    Boolean cambioDeEscena : Public
+    Bomberman.Winform winform : Public, Static
+    Bomberman.Imagenes imagenes : Public, Static
+    System.Drawing.Graphics graphics : Public, Static
+    System.Drawing.BufferedGraphicsContext context : Public, Static
+    System.Random aleatorio : Public, Static
+    Bomberman.Upecino upecino : Public, Static
+    Bomberman.MatrizObjetos objetos : Public, Static
+    Bomberman.ArrBombas bombas : Public, Static
+    Bomberman.ArrMalignos malignos : Public, Static
+    Bomberman.Introduccion introduccion : Public, Static
+    Bomberman.Inicio inicio : Public, Static
+    Bomberman.Instrucciones instrucciones : Public, Static
+    Bomberman.Juego juego : Public, Static
+    Bomberman.Pausa pausa : Public, Static
+    Bomberman.YouWin youWin : Public, Static
+    Bomberman.Congratulations congratulations : Public, Static
+    Bomberman.GameOver gameOver : Public, Static
+    Bomberman.Creditos creditos : Public, Static
+    Bomberman.Nivel1 nivel1 : Public, Static
+    Bomberman.Nivel2 nivel2 : Public, Static
+    Bomberman.Nivel3 nivel3 : Public, Static
+    Bomberman.Nivel4 nivel4 : Public, Static
+    Bomberman.Nivel5 nivel5 : Public, Static
+    System.Windows.Forms.Timer timer : Public, Static
+Struct Bomberman.Estados: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
+Struct Bomberman.Direcciones: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
+Struct Bomberman.Malignos: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
+Struct Bomberman.Objetos: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
+Struct Bomberman.Items: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
