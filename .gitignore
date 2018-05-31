@@ -39,6 +39,7 @@ Release
 *.vbproj.user
 ipch
 *sdf
+*.vs
 
 #UpdateVersion
 *.VC
