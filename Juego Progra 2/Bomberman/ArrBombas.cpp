@@ -4,6 +4,7 @@ namespace Bomberman
 {
 	ArrBombas::ArrBombas()
 	{
+
 		arreglo = nullptr;
 		cantidad = 0;
 	}
