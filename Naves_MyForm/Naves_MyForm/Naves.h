@@ -9,6 +9,7 @@ class Naves
 			int id;
 			int x;
 			int y;
+			int vida_constante; // auxiliar 
 			int vida;
 			int material;
 			char tipo; //A= Escudo, C=Nave_casador,B=Nodriza
@@ -20,6 +21,7 @@ class Naves
 			int Get_id();
 			int Get_x();
 			int Get_y();
+			int Get_vida_constante();
 			int Get_vida();
 			int Get_material();
 			char Get_tipo();
@@ -52,6 +54,7 @@ Naves::~Naves(){}
 int Naves:: Get_id() { return this->id; }
 int Naves::Get_x() { return this->x; }
 int Naves::Get_y(){ return this->y; }
+int Naves::Get_vida_constante() { return this->vida_constante; }
 int Naves::Get_vida(){ return this->vida; }
 int Naves::Get_material(){ return this->material; }
 char Naves::Get_tipo(){ return this->tipo; }

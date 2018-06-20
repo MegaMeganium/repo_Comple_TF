@@ -17,6 +17,7 @@ class Jugador
 
 			void Agregar_Nave(Naves* Nueva_Nave);
 			void Calcular_Danio(int id, int danio);
+			void Rehabilitar_Nave();
 			void Cambiar_Estado_Nave();
 	};
 
@@ -53,7 +54,18 @@ void Jugador::Calcular_Danio(int id, int danio)
 						Vida_Actualizada = 0;
 					Flota[i]->Set_vida(Vida_Actualizada);
 					if (Flota[i]->Get_vida() == 0)
-						Cambiar_Estado_Nave(Flota[i]->Get_id());
+						Cambiar_Estado_Nave();
+				}
+	}
+
+void Jugador::Rehabilitar_Nave()
+	{
+		for (int i = 0; i < *N; i++)
+			if(Flota[i]->Get_vida()==0)
+				{
+					Flota[i]->Set_vida(Flota[i]->Get_vida_constante());
+					Cambiar_Estado_Nave();
+					break;
 				}
 	}
 
