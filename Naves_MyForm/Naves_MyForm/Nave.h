@@ -14,6 +14,8 @@ using namespace System::Windows::Forms;
 using namespace Helpers::Estados;
 using namespace Helpers::Nave;
 
+#include "Misil.h"
+
 class Nave
 {
 private:
@@ -36,6 +38,10 @@ public:
 	int Get_id();
 	int Get_x();
 	int Get_y();
+	int Get_w();
+	int Get_h();
+	int Get_xSprite();
+	int Get_ySprite();
 	const int Get_vida_max();
 	int Get_vida();
 	int Get_material();
@@ -55,6 +61,7 @@ public:
 
 	void Dibujar(Graphics^ g, int x, int y, int ancho, int largo);
 	void DibujarNave(Graphics^ g);
+	bool HayColision(int x, int y);
 
 };
 Nave::Nave() 
@@ -83,6 +90,10 @@ Nave::~Nave() {}
 int Nave::Get_id() { return this->id; }
 int Nave::Get_x() { return this->x; }
 int Nave::Get_y() { return this->y; }
+int Nave::Get_xSprite() { return this->xSprite; }
+int Nave::Get_ySprite() { return this->ySprite; }
+int Nave::Get_w() { return this->ancho; }
+int Nave::Get_h() { return this->largo; }
 const int Nave::Get_vida_max() { return this->vida_max; }
 int Nave::Get_vida() { return this->vida; }
 int Nave::Get_material() { return this->material; }
@@ -126,6 +137,14 @@ void Nave::DibujarNave(Graphics^ g)
 		g->FillRectangle(Brushes::Red, xSprite, ySprite + largo, (int)(b / a * ancho), 10);
 		delete img;
 	}
+}
+
+bool Nave::HayColision(int x, int y)
+{
+	Rectangle obj1 = Rectangle(X_Recalculation(this->x, this->ancho), Y_Recalculation(this->y, this->largo), this->ancho, this->largo);
+	Rectangle obj2 = Rectangle(X_Recalculation(x, ancho), Y_Recalculation(y, largo), ancho, largo);
+
+	return obj1.IntersectsWith(obj2);
 }
 
 #endif // !_Nave_

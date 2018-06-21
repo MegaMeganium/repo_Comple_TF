@@ -94,6 +94,11 @@ namespace Helpers
 			return aux.str();
 		}
 	};
+
+	namespace Misil
+	{
+
+	};
 };
 
 #endif // !_Helpers_

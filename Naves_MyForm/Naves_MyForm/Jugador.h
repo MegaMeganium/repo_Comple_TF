@@ -26,6 +26,7 @@ public:
 	void Rehabilitar_Nave();
 	void Cambiar_Estado_Nave();
 	void DibujarFlota(Graphics^ g);
+	bool HayColisionEntreNaves(int x, int y);
 };
 
 Jugador::Jugador()
@@ -62,7 +63,7 @@ void Jugador::Agregar_Nave(Nave* Nueva_Nave)
 
 void Jugador::PosicionarNave(int x, int y)
 {
-	if (!(contadorFlota < FlotaMax)) return;
+	if (!(contadorFlota < FlotaMax) || HayColisionEntreNaves(x, y)) return;
 	Flota[contadorFlota]->Set_X_Y(x, y);
 	Flota[contadorFlota]->Set_estado(EstadoNave::Vivo);
 	contadorFlota++;
@@ -79,7 +80,7 @@ void Jugador::Calcular_Danio(int id, int danio)
 				Vida_Actualizada = 0;
 			Flota[i]->Set_vida(Vida_Actualizada);
 			if (Flota[i]->Get_vida() == 0)
-				Cambiar_Estado_Nave();
+				Flota[i]->Set_estado(EstadoNave::FueraCombate);
 		}
 }
 
@@ -109,6 +110,14 @@ void Jugador::DibujarFlota(Graphics^ g)
 	{
 		Flota[i]->DibujarNave(g);
 	}
+}
+
+bool Jugador::HayColisionEntreNaves(int x, int y)
+{
+	for (auto i = 0; i < contadorFlota; i++)
+		if (Flota[i]->HayColision(x, y))
+			return true;
+	return false;
 }
 
 #endif // !_JUGADOR_
