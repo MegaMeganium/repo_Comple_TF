@@ -72,11 +72,11 @@ namespace Naves_MyForm {
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->ClientSize = System::Drawing::Size(1264, 681);
+			this->ClientSize = System::Drawing::Size(1500, 900);
 			this->DoubleBuffered = true;
 			this->Margin = System::Windows::Forms::Padding(2);
-			this->Name = L"MyForm";
-			this->Text = L"MyForm";
+			this->Name = L"Nave";
+			this->Text = L"StarCraft";
 			this->MouseClick += gcnew System::Windows::Forms::MouseEventHandler(this, &MyForm::MyForm_MouseClick);
 			this->ResumeLayout(false);
 

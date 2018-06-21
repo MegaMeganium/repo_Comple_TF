@@ -18,7 +18,7 @@ class Nave
 {
 private:
 	int id;
-	int x, y;
+	int x, y, xSprite, ySprite;
 	const int vida_max = GetvidaMax(this->tipo); // auxiliar
 	const int ancho = 65, largo = 80;
 	int vida;
@@ -46,6 +46,8 @@ public:
 	void Set_Id(int id);
 	void Set_x(int x);
 	void Set_y(int y);
+	void Set_xSprite(int x);
+	void Set_ySprite(int y);
 	void Set_vida(int vida);
 	void Set_material(int material);
 	void Set_tipo(TipoNave tipo);
@@ -87,10 +89,18 @@ int Nave::Get_material() { return this->material; }
 TipoNave Nave::Get_tipo() { return this->tipo; }
 EstadoNave Nave::Get_estado() { return this->estado; }
 
-void Nave::Set_X_Y(int x, int y) { this->x = x; this->y = y; }
+void Nave::Set_X_Y(int x, int y) 
+{
+	this->x = x; 
+	this->y = y; 
+	this->xSprite = X_Recalculation(this->x, this->ancho);
+	this->ySprite = Y_Recalculation(this->y, this->largo);
+}
 void Nave::Set_Id(int id) { this->id = id; }
 void Nave::Set_x(int x) { this->x = x; }
 void Nave::Set_y(int y) { this->y = y; }
+void Nave::Set_xSprite(int x) { this->xSprite = X_Recalculation(this->x, this->ancho); }
+void Nave::Set_ySprite(int x) { this->ySprite = Y_Recalculation(this->y, this->largo); }
 void Nave::Set_vida(int vida) { this->vida = vida; }
 void Nave::Set_material(int material) { this->material = material; }
 void Nave::Set_tipo(TipoNave tipo) { this->tipo = tipo; }
@@ -109,11 +119,11 @@ void Nave::DibujarNave(Graphics^ g)
 	{
 		Bitmap^ img = gcnew Bitmap(gcnew String(sprite.c_str()));
 		img->MakeTransparent(img->GetPixel(0, 0));
-		g->DrawImage(img, x, y, ancho, largo);
+		g->DrawImage(img, xSprite, ySprite, ancho, largo);
 		float a = this->vida;
 		float b = this->vida_max;
-		g->FillRectangle(Brushes::DarkRed, x, y + largo, ancho, 10);
-		g->FillRectangle(Brushes::Red, x, y + largo, (int)(b / a * ancho), 10);
+		g->FillRectangle(Brushes::DarkRed, xSprite, ySprite + largo, ancho, 10);
+		g->FillRectangle(Brushes::Red, xSprite, ySprite + largo, (int)(b / a * ancho), 10);
 		delete img;
 	}
 }

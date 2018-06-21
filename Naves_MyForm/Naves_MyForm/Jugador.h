@@ -6,8 +6,6 @@
 
 #define FlotaMax 8
 
-using namespace std;
-
 class Jugador
 {
 private:

@@ -36,6 +36,16 @@ namespace Helpers
 
 	namespace Nave 
 	{
+		int X_Recalculation(int x, int ancho) 
+		{
+			return x - (ancho / 2);
+		}
+
+		int Y_Recalculation(int y, int altura)
+		{
+			return y - (altura / 2);
+		}
+
 		const int GetvidaMax(Estados::TipoNave tipo) 
 		{
 			switch (tipo)
