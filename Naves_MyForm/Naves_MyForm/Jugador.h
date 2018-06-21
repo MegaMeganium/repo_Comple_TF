@@ -12,10 +12,10 @@ private:
 	int Material_Total;
 	EstadoJugador estado;
 	Nave **Flota;
-	//map<int, Nave> flo;
 	int *N;
 public:
-	Jugador(int Material_Total, char estado);
+	Nave*prueba = new Nave(0, 30, 10,10, TipoNave::Nodriza, Bando::Enemigo);
+	Jugador(int Material_Total);
 	~Jugador();
 
 	void Agregar_Nave(Nave* Nueva_Nave);
@@ -24,13 +24,13 @@ public:
 	void Cambiar_Estado_Nave();
 };
 
-Jugador::Jugador(int Material_Total, char estado)
+Jugador::Jugador(int Material_Total)
 {
 	N = new int;
 	*N = 8;
 	Flota = new Nave*[*N];
 	this->Material_Total = Material_Total;
-	this->estado = estado;
+	this->estado = EstadoJugador::Jugando;
 }
 Jugador::~Jugador() {}
 
@@ -75,9 +75,9 @@ void Jugador::Cambiar_Estado_Nave()
 {
 	for (int i = 0; i < *N; i++)
 		if (Flota[i]->Get_vida() == 0)
-			Flota[i]->Set_estado('F');
+			Flota[i]->Set_estado(EstadoNave::FueraCombate);
 		else
-			Flota[i]->Set_estado('V');
+			Flota[i]->Set_estado(EstadoNave::Vivo);
 }
 
 #endif // !_JUGADOR_

@@ -22,6 +22,7 @@ namespace Naves_MyForm {
 			g = this->CreateGraphics();
 			bc = BufferedGraphicsManager::Current;
 			bg = bc->Allocate(g, this->ClientRectangle);
+			fondo = gcnew Bitmap(gcnew String("Naves\\FondoGalaxia.png"));
 		}
 
 	protected:
@@ -47,6 +48,7 @@ namespace Naves_MyForm {
 		Graphics^ g;
 		BufferedGraphicsContext^ bc;
 		BufferedGraphics^ bg;
+		Bitmap^ fondo;
 
 
 #pragma region Windows Form Designer generated code
@@ -62,13 +64,16 @@ namespace Naves_MyForm {
 			// 
 			// timer1
 			// 
+			this->timer1->Enabled = true;
 			this->timer1->Tick += gcnew System::EventHandler(this, &MyForm::timer1_Tick);
 			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(363, 318);
+			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			this->ClientSize = System::Drawing::Size(1264, 681);
+			this->DoubleBuffered = true;
 			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"MyForm";
 			this->Text = L"MyForm";
@@ -82,9 +87,8 @@ namespace Naves_MyForm {
 		
 	}
 	private: System::Void timer1_Tick(System::Object^  sender, System::EventArgs^  e) {
-		//
-		//Funcion de dibujado de la controladora
-		//
+		bg->Graphics->DrawImage(fondo, g->VisibleClipBounds);
+		juego->TimerTick(bg->Graphics);
 		bg->Render(g);
 	}
 	};

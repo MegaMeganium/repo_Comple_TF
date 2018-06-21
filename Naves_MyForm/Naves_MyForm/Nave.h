@@ -10,6 +10,7 @@
 using namespace std;
 using namespace System;
 using namespace System::Drawing;
+using namespace System::Windows::Forms;
 using namespace Extras;
 
 class Nave
@@ -24,6 +25,7 @@ private:
 	TipoNave tipo;
 	EstadoNave estado;
 	string sprite;
+	
 	Bando bando;
 
 private:
@@ -48,24 +50,24 @@ private:
 		case Escudo:
 			aux.clear();
 			if (bando == Bando::Aliado)
-				aux << "Naves/DefensaAliada_" << getAB() << ".png";
-			aux << "Naves/DefensaEnemiga_" << getAB() << ".png";
+				aux << "Naves\\DefensaAliada_" << getAB() << ".png";
+			aux << "Naves\\DefensaEnemiga_" << getAB() << ".png";
 			break;
 		case Cazador:
 			aux.clear();
 			if (bando == Bando::Aliado)
-				aux << "Naves/CazaAliada_" << getAB() << ".png";
-			aux << "Naves/CazaEnemiga_" << getAB() << ".png";
+				aux << "Naves\\CazaAliada_" << getAB() << ".png";
+			aux << "Naves\\CazaEnemiga_" << getAB() << ".png";
 			break;
 		case Nodriza:
 			aux.clear();
 			if(bando == Bando::Aliado)
-				aux << "Naves/NodrizaAliada.png";
-			aux << "Naves/NodrizaEnemiga.png";
+				aux << "Naves\\NodrizaAliada.png";
+			aux << "Naves\\NodrizaEnemiga.png";
 			break;
 		default:
 			aux.clear();
-			aux << "_ERROR_";
+			aux << "Naves\\_ERROR_.png";
 		}
 		return aux.str();
 	}
@@ -136,12 +138,13 @@ void Nave::Dibujar(Graphics^g, int x, int y, int ancho, int largo)
 void Nave::DibujarNave(Graphics^ g)
 {
 	Bitmap^ img = gcnew Bitmap(gcnew String(sprite.c_str()));
-	img->MakeTransparent(img->GetPixel(0, 0));
+	//img->MakeTransparent(img->GetPixel(0, 0));
 	g->DrawImage(img, x, y, ancho, largo);
 	float a = this->vida;
 	float b = this->vida_max;
 	g->FillRectangle(Brushes::DarkRed, x, y, ancho, 10);
 	g->FillRectangle(Brushes::Red, x, y, (int)(b / a * ancho), 10);
+	delete img;
 }
 
 #endif // !_Nave_

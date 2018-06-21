@@ -144,12 +144,27 @@
     </ClInclude>
     <ClInclude Include="Nave.h" />
     <ClInclude Include="Rastreador.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Teledirigido.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MyForm.resx">
       <DependentUpon>MyForm.h</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Naves\CazaAliada_A.png" />
+    <Image Include="Naves\CazaAliada_B.png" />
+    <Image Include="Naves\CazaEnamiga_A.png" />
+    <Image Include="Naves\CazaEnemiga_B.png" />
+    <Image Include="Naves\DefensaAliada_A.png" />
+    <Image Include="Naves\DefensaEnemiga_A.png" />
+    <Image Include="Naves\Explosion.png" />
+    <Image Include="Naves\FondoGalaxia.png" />
+    <Image Include="Naves\Misil_A.png" />
+    <Image Include="Naves\NodrizaAliada.png" />
+    <Image Include="Naves\NodrizaEnemiga.png" />
+    <Image Include="Naves\_ERROR_.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
