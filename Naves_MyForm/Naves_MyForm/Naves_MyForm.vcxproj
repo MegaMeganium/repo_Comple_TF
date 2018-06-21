@@ -136,11 +136,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Controlador_Juego.h" />
+    <ClInclude Include="Helpers.h" />
     <ClInclude Include="Jugador.h" />
+    <ClInclude Include="Misil.h" />
     <ClInclude Include="MyForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="Naves.h" />
+    <ClInclude Include="Nave.h" />
+    <ClInclude Include="Rastreador.h" />
+    <ClInclude Include="Teledirigido.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MyForm.resx">
