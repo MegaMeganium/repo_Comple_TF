@@ -6,19 +6,24 @@
 class Rastreador : public Misil
 {
 public:
-	Rastreador();
+	Rastreador(int danio);
 	~Rastreador();
 
+	void Algoritmo();
 private:
 
 };
 
-Rastreador::Rastreador()
+Rastreador::Rastreador(int danio) : Misil::Misil()
 {
+	this->danio = danio;
 }
 
-Rastreador::~Rastreador()
+Rastreador::~Rastreador() {}
+
+void Rastreador::Algoritmo()
 {
+
 }
 
 #endif // !_RASTREADOR_

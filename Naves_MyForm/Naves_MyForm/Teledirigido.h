@@ -6,19 +6,25 @@
 class Teledirigido : public Misil
 {
 public:
-	Teledirigido();
+	Teledirigido(int danio);
 	~Teledirigido();
+
+	void Algoritmo();
 
 private:
 
 };
 
-Teledirigido::Teledirigido()
+Teledirigido::Teledirigido(int danio) : Misil::Misil()
 {
+	this->danio = danio;
 }
 
-Teledirigido::~Teledirigido()
+Teledirigido::~Teledirigido() {}
+
+void Teledirigido::Algoritmo()
 {
+
 }
 
 #endif // !_TELEDIRIGIDO_

@@ -69,9 +69,9 @@ namespace Helpers
 			case Estados::TipoNave::Escudo:
 				aux.clear();
 				if (bando == Estados::Bando::Aliado)
-					aux << "Naves\\DefensaAliada_" << ArandB() << ".png";
+					aux << "Naves\\DefensaAliada_A" << ".png";
 				else
-					aux << "Naves\\DefensaEnemiga_" << ArandB() << ".png";
+					aux << "Naves\\DefensaEnemiga_A"<< ".png";
 				break;
 			case Estados::TipoNave::Cazador:
 				aux.clear();
@@ -93,6 +93,11 @@ namespace Helpers
 			}
 			return aux.str();
 		}
+	};
+
+	namespace Misil
+	{
+
 	};
 };
 
