@@ -11,66 +11,26 @@ using namespace std;
 using namespace System;
 using namespace System::Drawing;
 using namespace System::Windows::Forms;
-using namespace Extras;
+using namespace Helpers::Estados;
+using namespace Helpers::Nave;
 
 class Nave
 {
 private:
 	int id;
 	int x, y;
-	const int vida_max = getvidaMax(); // auxiliar
+	const int vida_max = GetvidaMax(this->tipo); // auxiliar
 	const int ancho = 65, largo = 80;
 	int vida;
 	int material;
 	TipoNave tipo;
 	EstadoNave estado;
 	string sprite;
-	
 	Bando bando;
 
 private:
-	const int getvidaMax() {
-		switch (tipo)
-		{
-		case Escudo:
-			return 100;
-		case Cazador:
-			return 60;
-		case Nodriza:
-			return 120;
-		default:
-			return -3;
-		}
-	}
 
-	string getSprite() {
-		stringstream aux;
-		switch (tipo)
-		{
-		case Escudo:
-			aux.clear();
-			if (bando == Bando::Aliado)
-				aux << "Naves\\DefensaAliada_" << getAB() << ".png";
-			aux << "Naves\\DefensaEnemiga_" << getAB() << ".png";
-			break;
-		case Cazador:
-			aux.clear();
-			if (bando == Bando::Aliado)
-				aux << "Naves\\CazaAliada_" << getAB() << ".png";
-			aux << "Naves\\CazaEnemiga_" << getAB() << ".png";
-			break;
-		case Nodriza:
-			aux.clear();
-			if(bando == Bando::Aliado)
-				aux << "Naves\\NodrizaAliada.png";
-			aux << "Naves\\NodrizaEnemiga.png";
-			break;
-		default:
-			aux.clear();
-			aux << "Naves\\_ERROR_.png";
-		}
-		return aux.str();
-	}
+	
 
 public:
 	Nave();
@@ -107,8 +67,8 @@ Nave::Nave(int id, int x, int y, int material, TipoNave tipo, Bando bando)
 	this->material = material;
 	this->tipo = tipo;
 	this->estado = EstadoNave::Vivo;
-	this->sprite = getSprite();
 	this->bando = bando;
+	this->sprite = GetSprite(this->tipo, this->bando);
 }
 Nave::~Nave() {}
 
@@ -138,12 +98,12 @@ void Nave::Dibujar(Graphics^g, int x, int y, int ancho, int largo)
 void Nave::DibujarNave(Graphics^ g)
 {
 	Bitmap^ img = gcnew Bitmap(gcnew String(sprite.c_str()));
-	//img->MakeTransparent(img->GetPixel(0, 0));
+	img->MakeTransparent(img->GetPixel(0, 0));
 	g->DrawImage(img, x, y, ancho, largo);
 	float a = this->vida;
 	float b = this->vida_max;
-	g->FillRectangle(Brushes::DarkRed, x, y, ancho, 10);
-	g->FillRectangle(Brushes::Red, x, y, (int)(b / a * ancho), 10);
+	g->FillRectangle(Brushes::DarkRed, x, y + largo, ancho, 10);
+	g->FillRectangle(Brushes::Red, x, y + largo, (int)(b / a * ancho), 10);
 	delete img;
 }
 
