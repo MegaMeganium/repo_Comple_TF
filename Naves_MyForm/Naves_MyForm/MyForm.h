@@ -72,11 +72,12 @@ namespace Naves_MyForm {
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->ClientSize = System::Drawing::Size(1500, 900);
+			this->ClientSize = System::Drawing::Size(1370, 749);
 			this->DoubleBuffered = true;
 			this->Margin = System::Windows::Forms::Padding(2);
-			this->Name = L"Nave";
+			this->Name = L"MyForm";
 			this->Text = L"StarCraft";
+			this->Load += gcnew System::EventHandler(this, &MyForm::MyForm_Load);
 			this->MouseClick += gcnew System::Windows::Forms::MouseEventHandler(this, &MyForm::MyForm_MouseClick);
 			this->ResumeLayout(false);
 
@@ -85,11 +86,15 @@ namespace Naves_MyForm {
 
 	private: System::Void MyForm_MouseClick(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) {
 		juego->GetHumano()->PosicionarNave(e->X, e->Y);
+	
 	}
 	private: System::Void timer1_Tick(System::Object^  sender, System::EventArgs^  e) {
 		bg->Graphics->DrawImage(fondo, g->VisibleClipBounds);
 		juego->TimerTick(bg->Graphics);
 		bg->Render(g);
+	}
+	private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e) {
+		juego->Dibujar_Flota_Enemiga(g->VisibleClipBounds.X,g->VisibleClipBounds.Y,g->VisibleClipBounds.Width, g->VisibleClipBounds.Height);
 	}
 	};
 }

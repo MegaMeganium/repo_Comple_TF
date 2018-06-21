@@ -59,7 +59,7 @@ public:
 	void Set_tipo(TipoNave tipo);
 	void Set_estado(EstadoNave estado);
 
-	void Dibujar(Graphics^ g, int x, int y, int ancho, int largo);
+//	void Dibujar(Graphics^ g, int x, int y, int ancho, int largo);
 	void DibujarNave(Graphics^ g);
 	bool HayColision(int x, int y);
 
@@ -116,14 +116,14 @@ void Nave::Set_vida(int vida) { this->vida = vida; }
 void Nave::Set_material(int material) { this->material = material; }
 void Nave::Set_tipo(TipoNave tipo) { this->tipo = tipo; }
 void Nave::Set_estado(EstadoNave estado) { this->estado = estado; }
-
+/*
 void Nave::Dibujar(Graphics^g, int x, int y, int ancho, int largo)
 {
 	Pen^ tr = gcnew Pen(Brushes::Black, 5);
 	g->DrawRectangle(tr, x, y, ancho, largo);
 	g->FillRectangle(Brushes::Yellow, x, y, ancho, largo);
 }
-
+*/
 void Nave::DibujarNave(Graphics^ g)
 {
 	if (estado == EstadoNave::Vivo)
