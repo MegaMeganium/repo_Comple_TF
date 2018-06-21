@@ -31,6 +31,7 @@ Jugador* Controlador_Juego::GetMaquina() { return this->Maquina; }
 void Controlador_Juego::TimerTick(Graphics^ g)
 {
 	Humano->DibujarFlota(g);
+//	Maquina->
 }
 
 #endif // !_Controlador_
