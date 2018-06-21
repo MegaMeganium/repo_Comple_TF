@@ -12,18 +12,25 @@ private:
 public:
 	Controlador_Juego();
 	~Controlador_Juego();
+
+	Jugador* GetHumano();
+	Jugador* GetMaquina();
 	void TimerTick(Graphics^ g);
 };
 
 Controlador_Juego::Controlador_Juego()
 {
-	Humano = new Jugador(2);
-	Maquina = new Jugador(2);
+	Humano = new Jugador();
+	Maquina = new Jugador();
 }
 Controlador_Juego::~Controlador_Juego(){}
+
+Jugador* Controlador_Juego::GetHumano() { return this->Humano; }
+Jugador* Controlador_Juego::GetMaquina() { return this->Maquina; }
+
 void Controlador_Juego::TimerTick(Graphics^ g)
 {
-	Humano->prueba->DibujarNave(g);
+	Humano->DibujarFlota(g);
 }
 
 #endif // !_Controlador_

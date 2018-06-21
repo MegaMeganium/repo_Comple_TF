@@ -1,7 +1,10 @@
 #ifndef _Helpers_
 #define _Helpers_
-namespace Helpers {
-	namespace Estados {
+
+namespace Helpers 
+{
+	namespace Estados 
+	{
 		enum EstadoNave
 		{
 			Vivo, Muerto, FueraCombate
@@ -23,15 +26,18 @@ namespace Helpers {
 		};
 	};
 	
-	char getAB() {
+	char ArandB() 
+	{
 		int aux = rand() % 102 + 1;
 		if (aux >= 1 && aux <= 50)
 			return 'A';
 		return 'B';
 	}
 
-	namespace Nave {
-		const int GetvidaMax(Estados::TipoNave tipo) {
+	namespace Nave 
+	{
+		const int GetvidaMax(Estados::TipoNave tipo) 
+		{
 			switch (tipo)
 			{
 			case Estados::TipoNave::Escudo:
@@ -45,27 +51,31 @@ namespace Helpers {
 			}
 		}
 
-		std::string GetSprite(Estados::TipoNave tipo, Estados::Bando bando) {
+		std::string GetSprite(Estados::TipoNave tipo, Estados::Bando bando) 
+		{
 			std::stringstream aux;
 			switch (tipo)
 			{
 			case Estados::TipoNave::Escudo:
 				aux.clear();
 				if (bando == Estados::Bando::Aliado)
-					aux << "Naves\\DefensaAliada_" << getAB() << ".png";
-				aux << "Naves\\DefensaEnemiga_" << getAB() << ".png";
+					aux << "Naves\\DefensaAliada_" << ArandB() << ".png";
+				else
+					aux << "Naves\\DefensaEnemiga_" << ArandB() << ".png";
 				break;
 			case Estados::TipoNave::Cazador:
 				aux.clear();
 				if (bando == Estados::Bando::Aliado)
-					aux << "Naves\\CazaAliada_" << getAB() << ".png";
-				aux << "Naves\\CazaEnemiga_" << getAB() << ".png";
+					aux << "Naves\\CazaAliada_" << ArandB() << ".png";
+				else
+					aux << "Naves\\CazaEnemiga_" << ArandB() << ".png";
 				break;
 			case Estados::TipoNave::Nodriza:
 				aux.clear();
 				if (bando == Estados::Bando::Aliado)
 					aux << "Naves\\NodrizaAliada.png";
-				aux << "Naves\\NodrizaEnemiga.png";
+				else
+					aux << "Naves\\NodrizaEnemiga.png";
 				break;
 			default:
 				aux.clear();

@@ -28,13 +28,9 @@ private:
 	string sprite;
 	Bando bando;
 
-private:
-
-	
-
 public:
 	Nave();
-	Nave(int id, int x, int y, int material, TipoNave tipo, Bando bando);
+	Nave(int id, int x, int y, TipoNave tipo, Bando bando);
 	~Nave();
 
 	int Get_id();
@@ -46,6 +42,8 @@ public:
 	TipoNave Get_tipo();
 	EstadoNave Get_estado();
 
+	void Set_X_Y(int x, int y);
+	void Set_Id(int id);
 	void Set_x(int x);
 	void Set_y(int y);
 	void Set_vida(int vida);
@@ -57,16 +55,24 @@ public:
 	void DibujarNave(Graphics^ g);
 
 };
-Nave::Nave() {}
-Nave::Nave(int id, int x, int y, int material, TipoNave tipo, Bando bando)
+Nave::Nave() 
+{
+	this->vida = this->vida_max;
+	this->material = 0;
+	this->tipo = TipoNave::Cazador;
+	this->bando = Bando::Aliado;
+	this->estado = EstadoNave::FueraCombate;
+	this->sprite = GetSprite(this->tipo, this->bando);
+}
+Nave::Nave(int id, int x, int y, TipoNave tipo, Bando bando)
 {
 	this->id = id;
 	this->x = x;
 	this->y = y;
 	this->vida = this->vida_max;
-	this->material = material;
+	this->material = 0;
 	this->tipo = tipo;
-	this->estado = EstadoNave::Vivo;
+	this->estado = EstadoNave::FueraCombate;
 	this->bando = bando;
 	this->sprite = GetSprite(this->tipo, this->bando);
 }
@@ -81,6 +87,8 @@ int Nave::Get_material() { return this->material; }
 TipoNave Nave::Get_tipo() { return this->tipo; }
 EstadoNave Nave::Get_estado() { return this->estado; }
 
+void Nave::Set_X_Y(int x, int y) { this->x = x; this->y = y; }
+void Nave::Set_Id(int id) { this->id = id; }
 void Nave::Set_x(int x) { this->x = x; }
 void Nave::Set_y(int y) { this->y = y; }
 void Nave::Set_vida(int vida) { this->vida = vida; }
@@ -97,14 +105,17 @@ void Nave::Dibujar(Graphics^g, int x, int y, int ancho, int largo)
 
 void Nave::DibujarNave(Graphics^ g)
 {
-	Bitmap^ img = gcnew Bitmap(gcnew String(sprite.c_str()));
-	img->MakeTransparent(img->GetPixel(0, 0));
-	g->DrawImage(img, x, y, ancho, largo);
-	float a = this->vida;
-	float b = this->vida_max;
-	g->FillRectangle(Brushes::DarkRed, x, y + largo, ancho, 10);
-	g->FillRectangle(Brushes::Red, x, y + largo, (int)(b / a * ancho), 10);
-	delete img;
+	if (estado == EstadoNave::Vivo)
+	{
+		Bitmap^ img = gcnew Bitmap(gcnew String(sprite.c_str()));
+		img->MakeTransparent(img->GetPixel(0, 0));
+		g->DrawImage(img, x, y, ancho, largo);
+		float a = this->vida;
+		float b = this->vida_max;
+		g->FillRectangle(Brushes::DarkRed, x, y + largo, ancho, 10);
+		g->FillRectangle(Brushes::Red, x, y + largo, (int)(b / a * ancho), 10);
+		delete img;
+	}
 }
 
 #endif // !_Nave_

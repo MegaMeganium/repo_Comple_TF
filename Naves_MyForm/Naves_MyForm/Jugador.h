@@ -4,6 +4,8 @@
 #include "Nave.h"
 #include <map>
 
+#define FlotaMax 8
+
 using namespace std;
 
 class Jugador
@@ -13,26 +15,41 @@ private:
 	EstadoJugador estado;
 	Nave **Flota;
 	int *N;
+	int contadorFlota;
 public:
-	Nave*prueba = new Nave(0, 30, 10,10, TipoNave::Nodriza, Bando::Enemigo);
-	Jugador(int Material_Total);
+	Nave*prueba = new Nave(0, 30, 10, TipoNave::Nodriza, Bando::Enemigo);
+	Jugador();
 	~Jugador();
 
+	void InicializarFlota();
 	void Agregar_Nave(Nave* Nueva_Nave);
+	void PosicionarNave(int x, int y);
 	void Calcular_Danio(int id, int danio);
 	void Rehabilitar_Nave();
 	void Cambiar_Estado_Nave();
+	void DibujarFlota(Graphics^ g);
 };
 
-Jugador::Jugador(int Material_Total)
+Jugador::Jugador()
 {
 	N = new int;
 	*N = 8;
-	Flota = new Nave*[*N];
-	this->Material_Total = Material_Total;
+	InicializarFlota();
+	this->Material_Total = 0;
+	this->contadorFlota = 0;
 	this->estado = EstadoJugador::Jugando;
 }
 Jugador::~Jugador() {}
+
+void Jugador::InicializarFlota()
+{
+	Flota = new Nave*[*N];
+	for (auto i = 0; i < *N; i++)
+	{
+		Flota[i] = new Nave();
+		Flota[i]->Set_Id(i);
+	}
+}
 
 void Jugador::Agregar_Nave(Nave* Nueva_Nave)
 {
@@ -43,6 +60,14 @@ void Jugador::Agregar_Nave(Nave* Nueva_Nave)
 	delete Flota;
 	Flota = aux;
 	*N = *N + 1;
+}
+
+void Jugador::PosicionarNave(int x, int y)
+{
+	if (!(contadorFlota < FlotaMax)) return;
+	Flota[contadorFlota]->Set_X_Y(x, y);
+	Flota[contadorFlota]->Set_estado(EstadoNave::Vivo);
+	contadorFlota++;
 }
 
 void Jugador::Calcular_Danio(int id, int danio)
@@ -78,6 +103,14 @@ void Jugador::Cambiar_Estado_Nave()
 			Flota[i]->Set_estado(EstadoNave::FueraCombate);
 		else
 			Flota[i]->Set_estado(EstadoNave::Vivo);
+}
+
+void Jugador::DibujarFlota(Graphics^ g)
+{
+	for (auto i = 0; i < *N; i++) 
+	{
+		Flota[i]->DibujarNave(g);
+	}
 }
 
 #endif // !_JUGADOR_

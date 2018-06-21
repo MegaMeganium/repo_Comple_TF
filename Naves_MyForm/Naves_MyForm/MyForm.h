@@ -84,7 +84,7 @@ namespace Naves_MyForm {
 #pragma endregion
 
 	private: System::Void MyForm_MouseClick(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) {
-		
+		juego->GetHumano()->PosicionarNave(e->X, e->Y);
 	}
 	private: System::Void timer1_Tick(System::Object^  sender, System::EventArgs^  e) {
 		bg->Graphics->DrawImage(fondo, g->VisibleClipBounds);
