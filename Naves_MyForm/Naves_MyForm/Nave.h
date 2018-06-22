@@ -71,10 +71,8 @@ Nave::Nave(Bando bando)
 {
 	this->vida = this->vida_max;
 	this->material = 0;
-	this->tipo = TipoNave::Cazador;
 	this->bando = bando;
 	this->estado = EstadoNave::FueraCombate;
-	this->sprite = GetSprite(this->tipo, this->bando);
 }
 Nave::Nave(int id, int x, int y, TipoNave tipo, Bando bando)
 {
@@ -119,7 +117,11 @@ void Nave::Set_ySprite(int x) { this->ySprite = Y_Recalculation(this->y, this->l
 void Nave::Set_vida(int vida) { this->vida = vida; }
 void Nave::Set_material(int material) { this->material = material; }
 void Nave::Set_bando(Bando bando) { this->bando = bando; }
-void Nave::Set_tipo(TipoNave tipo) { this->tipo = tipo; }
+void Nave::Set_tipo(TipoNave tipo) 
+{ 
+	this->tipo = tipo; 
+	this->sprite = GetSprite(this->tipo, this->bando);
+}
 void Nave::Set_estado(EstadoNave estado) { this->estado = estado; }
 /*
 void Nave::Dibujar(Graphics^g, int x, int y, int ancho, int largo)

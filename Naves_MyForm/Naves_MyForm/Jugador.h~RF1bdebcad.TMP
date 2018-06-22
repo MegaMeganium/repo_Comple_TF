@@ -13,20 +13,19 @@ private:
 	EstadoJugador estado;
 	Nave **Flota;
 	int contadorFlota;
-
 public:
+	Nave*prueba = new Nave(0, 30, 10, TipoNave::Nodriza, Bando::Enemigo);
 	Jugador(Bando bando);
 	~Jugador();
 
 	void InicializarFlota(Bando bando);
 	void Agregar_Nave(int x, int y,int width, int height);
-	void PosicionarNave(int x, int y, MouseButtons button);
+	void PosicionarNave(int x, int y);
 	void Calcular_Danio(int id, int danio);
 	void Rehabilitar_Nave();
 	void Cambiar_Estado_Nave();
 	void DibujarFlota(Graphics^ g, char identificar);
 	bool HayColisionEntreNaves(int x, int y);
-
 };
 
 Jugador::Jugador(Bando bando)
@@ -69,19 +68,15 @@ void Jugador::Agregar_Nave(int x, int y, int width, int heighty)
 					aux_x2 = aux_x / 2;
 				}
 			Flota[i]->Set_estado(EstadoNave::Vivo);
-			if (i == 2 || i == 5 || i == 10 || i == 13)
-				Flota[i]->Set_tipo(TipoNave::Escudo);
-			else
-				Flota[i]->Set_tipo(TipoNave::Cazador);
+			(i == 2 || i == 5 || i == 10 || i == 13) ? Flota[i]->Set_tipo(TipoNave::Escudo) : 0;
 		}
 }
 
-void Jugador::PosicionarNave(int x, int y, MouseButtons button)
+void Jugador::PosicionarNave(int x, int y)
 {
 	if (!(contadorFlota < FlotaMax) || HayColisionEntreNaves(x, y)) return;
 	Flota[contadorFlota]->Set_X_Y(x, y);
 	Flota[contadorFlota]->Set_estado(EstadoNave::Vivo);
-	Flota[contadorFlota]->Set_tipo(MouseButtons::Left == button? TipoNave::Cazador : TipoNave::Escudo);
 	contadorFlota++;
 }
 

@@ -35,6 +35,8 @@ namespace Naves_MyForm {
 			{
 				delete components;
 			}
+			delete juego;
+			delete g, bc, bg, fondo;
 		}
 	private: System::Windows::Forms::Timer^  timer1;
 	protected:
@@ -69,16 +71,17 @@ namespace Naves_MyForm {
 			// 
 			// MyForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->ClientSize = System::Drawing::Size(1827, 922);
+			this->ClientSize = System::Drawing::Size(1370, 749);
 			this->DoubleBuffered = true;
-			this->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"MyForm";
 			this->Text = L"StarCraft";
 			this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
 			this->Load += gcnew System::EventHandler(this, &MyForm::MyForm_Load);
+			this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &MyForm::MyForm_KeyDown);
 			this->MouseClick += gcnew System::Windows::Forms::MouseEventHandler(this, &MyForm::MyForm_MouseClick);
 			this->ResumeLayout(false);
 
@@ -86,8 +89,8 @@ namespace Naves_MyForm {
 #pragma endregion
 
 	private: System::Void MyForm_MouseClick(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) {
-		juego->GetHumano()->PosicionarNave(e->X, e->Y);
-	
+		juego->GetHumano()->PosicionarNave(e->X, e->Y, e->Button);
+		
 	}
 	private: System::Void timer1_Tick(System::Object^  sender, System::EventArgs^  e) {
 		bg->Graphics->DrawImage(fondo, g->VisibleClipBounds);
@@ -95,8 +98,10 @@ namespace Naves_MyForm {
 		bg->Render(g);
 	}
 	private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e) {
-		
 		juego->Dibujar_Flota_Enemiga(g->VisibleClipBounds.X,g->VisibleClipBounds.Y,g->VisibleClipBounds.Width, g->VisibleClipBounds.Height);
+	}
+	private: System::Void MyForm_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e) {
+		
 	}
 	};
 }

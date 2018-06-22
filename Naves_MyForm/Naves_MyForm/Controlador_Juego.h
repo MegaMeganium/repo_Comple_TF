@@ -24,7 +24,11 @@ Controlador_Juego::Controlador_Juego()
 	Humano = new Jugador(Bando::Aliado);
 	Maquina = new Jugador(Bando::Enemigo);
 }
-Controlador_Juego::~Controlador_Juego(){}
+Controlador_Juego::~Controlador_Juego()
+{
+	delete this->Humano;
+	delete this->Maquina;
+}
 
 Jugador* Controlador_Juego::GetHumano() { return this->Humano; }
 Jugador* Controlador_Juego::GetMaquina() { return this->Maquina; }

@@ -12,7 +12,7 @@ namespace Helpers
 
 		enum TipoNave
 		{
-			Escudo, Cazador, Nodriza
+			Escudo, Cazador, Nodriza, Error
 		};
 
 		enum EstadoJugador
