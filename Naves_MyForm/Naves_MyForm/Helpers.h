@@ -1,6 +1,10 @@
 #ifndef _Helpers_
 #define _Helpers_
 
+#include <string>
+#include <string.h>
+#include <sstream>
+
 namespace Helpers 
 {
 	namespace Estados 

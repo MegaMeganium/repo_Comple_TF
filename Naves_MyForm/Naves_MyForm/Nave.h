@@ -1,11 +1,7 @@
 #ifndef _Nave_
 #define _Nave_
 
-#include <string>
-#include <string.h>
-#include <sstream>
 #include <ctime>
-#include "Helpers.h"
 
 using namespace std;
 using namespace System;
@@ -21,7 +17,7 @@ class Nave
 private:
 	int id;
 	int x, y, xSprite, ySprite;
-	const int vida_max = GetvidaMax(this->tipo); // auxiliar
+	int vida_max; // auxiliar
 	const int ancho = 65, largo = 80;
 	int vida;
 	int material;
@@ -69,9 +65,9 @@ public:
 };
 Nave::Nave(Bando bando) 
 {
-	this->vida = this->vida_max;
 	this->material = 0;
 	this->bando = bando;
+	this->tipo = TipoNave::Error;
 	this->estado = EstadoNave::FueraCombate;
 }
 Nave::Nave(int id, int x, int y, TipoNave tipo, Bando bando)
@@ -119,7 +115,9 @@ void Nave::Set_material(int material) { this->material = material; }
 void Nave::Set_bando(Bando bando) { this->bando = bando; }
 void Nave::Set_tipo(TipoNave tipo) 
 { 
-	this->tipo = tipo; 
+	this->tipo = tipo;
+	this->vida_max = GetvidaMax(this->tipo);
+	this->vida = this->vida_max;
 	this->sprite = GetSprite(this->tipo, this->bando);
 }
 void Nave::Set_estado(EstadoNave estado) { this->estado = estado; }

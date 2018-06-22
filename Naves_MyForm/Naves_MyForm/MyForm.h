@@ -1,4 +1,5 @@
 #pragma once
+#include "Helpers.h"
 #include "Controlador_Juego.h"
 namespace Naves_MyForm {
 
@@ -98,6 +99,7 @@ namespace Naves_MyForm {
 		bg->Render(g);
 	}
 	private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e) {
+		srand(time(NULL));
 		juego->Dibujar_Flota_Enemiga(g->VisibleClipBounds.X,g->VisibleClipBounds.Y,g->VisibleClipBounds.Width, g->VisibleClipBounds.Height);
 	}
 	private: System::Void MyForm_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e) {
