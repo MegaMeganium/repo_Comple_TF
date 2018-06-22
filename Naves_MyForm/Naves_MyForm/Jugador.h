@@ -4,7 +4,7 @@
 #include "Nave.h"
 #include <map>
 
-#define FlotaMax 8
+#define FlotaMax 16
 
 class Jugador
 {
@@ -12,53 +12,59 @@ private:
 	int Material_Total;
 	EstadoJugador estado;
 	Nave **Flota;
-	int *N;
 	int contadorFlota;
 public:
 	Nave*prueba = new Nave(0, 30, 10, TipoNave::Nodriza, Bando::Enemigo);
-	Jugador();
+	Jugador(Bando bando);
 	~Jugador();
 
-	void InicializarFlota();
-	void Agregar_Nave(Nave* Nueva_Nave);
+	void InicializarFlota(Bando bando);
+	void Agregar_Nave(int x, int y,int width, int height);
 	void PosicionarNave(int x, int y);
 	void Calcular_Danio(int id, int danio);
 	void Rehabilitar_Nave();
 	void Cambiar_Estado_Nave();
-	void DibujarFlota(Graphics^ g);
+	void DibujarFlota(Graphics^ g, char identificar);
 	bool HayColisionEntreNaves(int x, int y);
 };
 
-Jugador::Jugador()
+Jugador::Jugador(Bando bando)
 {
-	N = new int;
-	*N = 8;
-	InicializarFlota();
+	InicializarFlota(bando);
 	this->Material_Total = 0;
 	this->contadorFlota = 0;
 	this->estado = EstadoJugador::Jugando;
 }
 Jugador::~Jugador() {}
 
-void Jugador::InicializarFlota()
+void Jugador::InicializarFlota(Bando bando)
 {
-	Flota = new Nave*[*N];
-	for (auto i = 0; i < *N; i++)
+	Flota = new Nave*[FlotaMax];
+	for (auto i = 0; i < FlotaMax; i++)
 	{
-		Flota[i] = new Nave();
+		Flota[i] = new Nave(bando);
 		Flota[i]->Set_Id(i);
 	}
 }
 
-void Jugador::Agregar_Nave(Nave* Nueva_Nave)
+void Jugador::Agregar_Nave(int x, int y, int width, int heighty)
 {
-	Nave** aux = new Nave*[*N + 1];
-	for (int i = 0; i < *N; i++)
-		aux[i] = Flota[i];
-	aux[*N] = Nueva_Nave;
-	delete Flota;
-	Flota = aux;
-	*N = *N + 1;
+	int aux_x = width / 8;
+	int aux_x2 = aux_x / 2;
+	int aux_y = heighty - (heighty / 2)-100;
+	for (int i = 0; i < FlotaMax; i++)
+		{
+			Flota[i]->Set_X_Y(aux_x2, aux_y);
+			aux_x2 += aux_x;
+			if (i  == 7)
+				{	 
+					aux_y -= (aux_y/2);
+				//	aux_x2 = Flota[0]->Get_x();
+					aux_x2 = aux_x / 2;
+				}
+			Flota[i]->Set_estado(EstadoNave::Vivo);
+			(i == 2 || i == 5 || i == 10 || i == 13) ? Flota[i]->Set_tipo(TipoNave::Escudo) : 0;
+		}
 }
 
 void Jugador::PosicionarNave(int x, int y)
@@ -72,7 +78,7 @@ void Jugador::PosicionarNave(int x, int y)
 void Jugador::Calcular_Danio(int id, int danio)
 {
 	int Vida_Actualizada = 0;
-	for (int i = 0; i < *N; i++)
+	for (int i = 0; i < FlotaMax; i++)
 		if (Flota[i]->Get_id() == id)
 		{
 			Vida_Actualizada = Flota[i]->Get_vida() - danio;
@@ -86,7 +92,7 @@ void Jugador::Calcular_Danio(int id, int danio)
 
 void Jugador::Rehabilitar_Nave()
 {
-	for (int i = 0; i < *N; i++)
+	for (int i = 0; i < FlotaMax; i++)
 		if (Flota[i]->Get_vida() == 0)
 		{
 			Flota[i]->Set_vida(Flota[i]->Get_vida_max());
@@ -97,16 +103,16 @@ void Jugador::Rehabilitar_Nave()
 
 void Jugador::Cambiar_Estado_Nave()
 {
-	for (int i = 0; i < *N; i++)
+	for (int i = 0; i < FlotaMax; i++)
 		if (Flota[i]->Get_vida() == 0)
 			Flota[i]->Set_estado(EstadoNave::FueraCombate);
 		else
 			Flota[i]->Set_estado(EstadoNave::Vivo);
 }
 
-void Jugador::DibujarFlota(Graphics^ g)
+void Jugador::DibujarFlota(Graphics^ g,char identificar)
 {
-	for (auto i = 0; i < *N; i++) 
+	for (auto i = 0; i < FlotaMax; i++) 
 	{
 		Flota[i]->DibujarNave(g);
 	}

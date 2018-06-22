@@ -31,7 +31,7 @@ private:
 	Bando bando;
 
 public:
-	Nave();
+	Nave(Bando bando);
 	Nave(int id, int x, int y, TipoNave tipo, Bando bando);
 	~Nave();
 
@@ -45,6 +45,7 @@ public:
 	const int Get_vida_max();
 	int Get_vida();
 	int Get_material();
+	Bando Get_bando();
 	TipoNave Get_tipo();
 	EstadoNave Get_estado();
 
@@ -56,20 +57,22 @@ public:
 	void Set_ySprite(int y);
 	void Set_vida(int vida);
 	void Set_material(int material);
+	void Set_bando(Bando bando);
 	void Set_tipo(TipoNave tipo);
 	void Set_estado(EstadoNave estado);
 
-	void Dibujar(Graphics^ g, int x, int y, int ancho, int largo);
+//	void Dibujar(Graphics^ g, int x, int y, int ancho, int largo);
 	void DibujarNave(Graphics^ g);
 	bool HayColision(int x, int y);
+	bool HayColisionOptimizado(int x, int y);
 
 };
-Nave::Nave() 
+Nave::Nave(Bando bando) 
 {
 	this->vida = this->vida_max;
 	this->material = 0;
 	this->tipo = TipoNave::Cazador;
-	this->bando = Bando::Aliado;
+	this->bando = bando;
 	this->estado = EstadoNave::FueraCombate;
 	this->sprite = GetSprite(this->tipo, this->bando);
 }
@@ -97,6 +100,7 @@ int Nave::Get_h() { return this->largo; }
 const int Nave::Get_vida_max() { return this->vida_max; }
 int Nave::Get_vida() { return this->vida; }
 int Nave::Get_material() { return this->material; }
+Bando Nave::Get_bando() { return this->bando; }
 TipoNave Nave::Get_tipo() { return this->tipo; }
 EstadoNave Nave::Get_estado() { return this->estado; }
 
@@ -114,27 +118,39 @@ void Nave::Set_xSprite(int x) { this->xSprite = X_Recalculation(this->x, this->a
 void Nave::Set_ySprite(int x) { this->ySprite = Y_Recalculation(this->y, this->largo); }
 void Nave::Set_vida(int vida) { this->vida = vida; }
 void Nave::Set_material(int material) { this->material = material; }
+void Nave::Set_bando(Bando bando) { this->bando = bando; }
 void Nave::Set_tipo(TipoNave tipo) { this->tipo = tipo; }
 void Nave::Set_estado(EstadoNave estado) { this->estado = estado; }
-
+/*
 void Nave::Dibujar(Graphics^g, int x, int y, int ancho, int largo)
 {
 	Pen^ tr = gcnew Pen(Brushes::Black, 5);
 	g->DrawRectangle(tr, x, y, ancho, largo);
 	g->FillRectangle(Brushes::Yellow, x, y, ancho, largo);
 }
+*/
 
 void Nave::DibujarNave(Graphics^ g)
 {
 	if (estado == EstadoNave::Vivo)
 	{
 		Bitmap^ img = gcnew Bitmap(gcnew String(sprite.c_str()));
+		float a = (float)this->vida;
+		float b = (float)this->vida_max;
+		int aux = 0;
 		img->MakeTransparent(img->GetPixel(0, 0));
-		g->DrawImage(img, xSprite, ySprite, ancho, largo);
-		float a = this->vida;
-		float b = this->vida_max;
-		g->FillRectangle(Brushes::DarkRed, xSprite, ySprite + largo, ancho, 10);
-		g->FillRectangle(Brushes::Red, xSprite, ySprite + largo, (int)(b / a * ancho), 10);
+		if (bando == Bando::Enemigo)
+		{
+			g->DrawImage(img, xSprite, ySprite + 50, ancho, -largo);
+			aux = -35;
+		}
+		else 
+		{
+			g->DrawImage(img, xSprite, ySprite, ancho, largo);
+			aux = this->largo;
+		}
+		g->FillRectangle(Brushes::DarkRed, xSprite, ySprite + aux, ancho, 10);
+		g->FillRectangle(Brushes::Red, xSprite, ySprite + aux, (int)(b / a * ancho), 10);
 		delete img;
 	}
 }
@@ -145,6 +161,13 @@ bool Nave::HayColision(int x, int y)
 	Rectangle obj2 = Rectangle(X_Recalculation(x, ancho), Y_Recalculation(y, largo), ancho, largo);
 
 	return obj1.IntersectsWith(obj2);
+}
+
+bool Nave::HayColisionOptimizado(int x, int y)
+{
+	if (x >= this->x && x <= this->x + this->ancho && y >= this->y && y <= this->y + this->largo)
+		return true;
+	return false;
 }
 
 #endif // !_Nave_

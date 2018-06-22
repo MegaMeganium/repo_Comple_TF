@@ -15,22 +15,29 @@ public:
 
 	Jugador* GetHumano();
 	Jugador* GetMaquina();
+	void Dibujar_Flota_Enemiga(int x, int y, int width, int height);
 	void TimerTick(Graphics^ g);
 };
 
 Controlador_Juego::Controlador_Juego()
 {
-	Humano = new Jugador();
-	Maquina = new Jugador();
+	Humano = new Jugador(Bando::Aliado);
+	Maquina = new Jugador(Bando::Enemigo);
 }
 Controlador_Juego::~Controlador_Juego(){}
 
 Jugador* Controlador_Juego::GetHumano() { return this->Humano; }
 Jugador* Controlador_Juego::GetMaquina() { return this->Maquina; }
 
+void Controlador_Juego::Dibujar_Flota_Enemiga(int x,int y,int width, int height)
+	{
+		Maquina->Agregar_Nave(x, y, width, height);
+	}
+
 void Controlador_Juego::TimerTick(Graphics^ g)
 {
-	Humano->DibujarFlota(g);
+	Humano->DibujarFlota(g,'J');
+	Maquina->DibujarFlota(g,'E');
 }
 
 #endif // !_Controlador_
