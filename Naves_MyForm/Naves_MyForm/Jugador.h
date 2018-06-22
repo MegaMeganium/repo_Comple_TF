@@ -2,6 +2,7 @@
 #define _JUGADOR_
 
 #include "Nave.h"
+#include "Rastreador.h"
 #include <map>
 
 #define FlotaMax 16
