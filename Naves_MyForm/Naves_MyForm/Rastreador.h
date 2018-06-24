@@ -1,3 +1,59 @@
+#ifndef _Rastreador_
+#define _Rastreador_
+#include "Misil.h"
+#define INF 9999999
+
+class Rastreador: public Misil
+	{
+		private:
+			vector<int> Objetivos;
+			int **distancia;
+			int **reccorrido;
+		public:
+			vector<int> FloydWarshall(int **Grafo, int origen, int destino, int V);
+	};
+vector<int> Rastreador::FloydWarshall(int **Grafo, int origen, int destino, int V)
+	{	
+		
+		distancia = new int*[V];
+		reccorrido = new int*[V];
+		for(int i = 0; i < V;i++)
+			{
+				distancia[i] = new int[V];
+				reccorrido[i] = new int[V];
+			}
+		for(int i = 0; i < V;i++)
+			for(int j = 0; j < V;j++)
+				{
+					distancia[i][j] = Grafo[i][j];
+					reccorrido[i][j] = i != j && Grafo[i][j] != INF ? i : -1;
+				}
+		for(int k = 0;k < V;k++)
+			for(int i= 0; i < V; i++)
+				for(int j= 0; j < V; j++)
+					if(i!=k && distancia[i][k]+distancia[k][j]<distancia[i][j])
+						{
+							distancia[i][j] = distancia[i][k] + distancia[k][j];
+							reccorrido[i][j] = reccorrido[k][j];
+						}
+		vector<int> objetivos;
+		int vertice_auxiliar;
+		while(origen!=destino)
+			{
+				vertice_auxiliar = reccorrido[origen][destino];
+				objetivos.push_back(vertice_auxiliar);
+				destino = vertice_auxiliar;
+			}
+		return objetivos;
+	}
+
+#endif // !_Rastreador_
+
+
+
+
+
+/*
 #ifndef _RASTREADOR_
 #define _RASTREADOR_
 
@@ -66,3 +122,4 @@ void Rastreador::Algoritmo(int src, int dest)
 
 
 #endif // !_RASTREADOR_
+*/
