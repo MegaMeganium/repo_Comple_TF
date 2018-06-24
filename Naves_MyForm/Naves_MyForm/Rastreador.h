@@ -37,6 +37,7 @@ vector<int> Rastreador::FloydWarshall(int **Grafo, int origen, int destino, int 
 							reccorrido[i][j] = reccorrido[k][j];
 						}
 		vector<int> objetivos;
+		objetivos.push_back(destino);
 		int vertice_auxiliar;
 		while(origen!=destino)
 			{
