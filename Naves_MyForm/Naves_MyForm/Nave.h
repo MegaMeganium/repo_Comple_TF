@@ -10,8 +10,8 @@ using namespace System::Windows::Forms;
 using namespace Helpers::Estados;
 using namespace Helpers::Nave;
 
-#include "Misil.h"
-
+#include "Teledirigido.h"
+#include "Rastreador.h"
 class Nave
 {
 private:

@@ -24,6 +24,7 @@ Teledirigido::Teledirigido(int danio) : Misil::Misil()
 
 Teledirigido::~Teledirigido() {}
 
+//Knapsack
 void Teledirigido::Algoritmo(int Vida[], int Material[])
 {
 	nav.clear();
