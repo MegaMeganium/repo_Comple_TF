@@ -14,7 +14,7 @@ class Rastreador: public Misil
 	};
 
 //FloydWarshall
-vector<int> Rastreador::Algoritmo(int **Grafo, int origen, int destino, int V)
+vector<int> Rastreador::Algoritmo(int **Grafo, int origen, int destino, int V) 
 	{	
 		
 		distancia = new int*[V];

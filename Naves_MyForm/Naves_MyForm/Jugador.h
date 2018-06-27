@@ -1,6 +1,7 @@
 #ifndef _JUGADOR_
 #define _JUGADOR_
 
+#include "Helpers.h"
 #include "Nave.h"
 #include "Rastreador.h"
 #include <map>

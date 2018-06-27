@@ -25,6 +25,7 @@ private:
 	EstadoNave estado;
 	string sprite;
 	Bando bando;
+	Misil *a; 
 
 public:
 	Nave(Bando bando);
