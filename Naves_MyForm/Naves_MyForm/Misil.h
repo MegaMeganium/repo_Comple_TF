@@ -30,7 +30,7 @@ public:
 
 
 	void DibujarMisil(System::Drawing::Graphics^ g);
-	virtual void Algoritmo() abstract;
+	virtual void Algoritmo();
 };
 
 Misil::Misil() 
@@ -55,6 +55,7 @@ void Misil::Set_h(int h) { this->largo = h; }
 void Misil::Set_danio(int danio) { this->danio = danio; }
 void Misil::Set_nav(vector<int>nav) { this->nav=nav; }
 
+//void Misil::Algoritmo() { return; }
 
 void Misil::DibujarMisil(System::Drawing::Graphics^ g)
 {
@@ -62,6 +63,10 @@ void Misil::DibujarMisil(System::Drawing::Graphics^ g)
 	img->MakeTransparent(img->GetPixel(0, 0));
 	g->DrawImage(img, x, y, ancho, largo);
 	delete img;
+}
+
+inline void Misil::Algoritmo()
+{
 }
 
 #endif // !_MISIL_
