@@ -15,8 +15,8 @@ class Controlador_Juego
 private:
 	Jugador *Humano;
 	Jugador *Maquina;
+	Nave** Flota;
 	int turno;
-	Nave** Flota = Maquina->Get_Flota();
 //	Rastreador *rastreador;
 	//Jugador **Jugadores;
 public:
@@ -34,6 +34,7 @@ Controlador_Juego::Controlador_Juego()
 {
 	Humano = new Jugador(Bando::Aliado);
 	Maquina = new Jugador(Bando::Enemigo);
+	Flota = Maquina->Get_Flota();
 }
 Controlador_Juego::~Controlador_Juego()
 {
