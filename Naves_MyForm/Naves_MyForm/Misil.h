@@ -1,7 +1,7 @@
 #ifndef _MISIL_
 #define _MISIL_
 
-#define VMax 100
+#define VMax 300
 typedef pair<int, int>iPair;
 
 class Misil {

@@ -17,6 +17,7 @@ public:
 	bool verificar(int j, int temp[], int k);
 	void Algoritmo(int n, int Vida[], int Material[], int indice[]);
 	int get_MaterialMax();
+	vector<int>get_NavTel();
 
 
 };
@@ -45,7 +46,7 @@ void Teledirigido::ordenar(vector<pair<int, iPair>>&obj)
 bool Teledirigido::verificar(int j, int temp[], int k)
 {
 	int in = 0;
-	for (int i = 0; i < k; i++)
+	for (int i = 0; i <= k; i++)
 	{
 		if (temp[i] == j)
 			in = 1;
@@ -59,8 +60,9 @@ bool Teledirigido::verificar(int j, int temp[], int k)
 //Knapsack
 void Teledirigido::Algoritmo(int n, int Vida[], int Material[], int indice[])
 {
-	int *a = new int[VMax];
-	int *temp = new int[VMax];
+	navTel.clear();
+	int *a = new int[VMax + 1];
+	int *temp = new int[VMax + 1];
 	int aux;
 
 	for (int i = 0; i <= VMax; i++) {
@@ -71,33 +73,45 @@ void Teledirigido::Algoritmo(int n, int Vida[], int Material[], int indice[])
 	a[0] = 0;
 	for (int i = 1; i <= VMax; i++)
 		for (int j = 1; j <= n; j++) {
+			int sum = 0;
 			if (verificar(j, temp, i) == false)
 				a[i] += Material[j];
 			if ((Vida[j] <= i) && (a[i] < a[i - Vida[j]] + Material[j]) && (verificar(j, temp, i) == true)) {
 				a[i] = a[i - Vida[j]] + Material[j];
 				temp[i] = j;
 			}
+			for (int k = 1; k <= n; k++) {
+				if (verificar(k, temp, i) == false)
+				{
+					sum += Material[k];
+					a[i + 1] = sum;
+				}
+			}
 		}
 
 	aux = VMax;
-	int tempM = VMax;
 	while ((aux <= VMax) && (aux>0)) {
 		if (temp[aux] != -1) {
 			navTel.push_back(indice[temp[aux]]);
+			aux -= Vida[temp[aux]];
 			//cout << "Se agrego " << indice[temp[aux]] << " ($" << Material[temp[aux]] << ", " << Vida[temp[aux]] << "Kg) Espacio disponible: " << tempM - Vida[temp[aux]] << endl;
 			//tempM -= Vida[temp[aux]];
 		}
-		aux -= Vida[temp[aux]];
+		else
+			aux -= 1;
+
 	}
 	//cout << "Valor total: $" << a[VMax] << endl;
 	MaterialMax = a[VMax];
-	delete[] temp;
-	delete[] a;
+
 }
 
 int Teledirigido::get_MaterialMax()
 {
 	return this->MaterialMax;
 }
-
+vector<int> Teledirigido::get_NavTel()
+{
+	return this->navTel;
+}
 #endif // !_TELEDIRIGIDO_

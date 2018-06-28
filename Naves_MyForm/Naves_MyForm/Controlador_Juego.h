@@ -142,11 +142,11 @@ void Controlador_Juego::Disparar_Misil(Keys tecla)
 			Maquina->Calcular_Danio(objetivos[i], 30);
 		break;
 	}
-	case Keys::W:
+	case Keys::E:
 	{
 		vector<pair<int, iPair>>naves;
-		int *Peso = new int[FlotaMax];
-		int *Valor = new int[FlotaMax];
+		int *Vida = new int[FlotaMax];
+		int *Material = new int[FlotaMax];
 		int *indice = new int[FlotaMax];
 		for (int i = 0; i < FlotaMax; i++)
 		{
@@ -156,9 +156,15 @@ void Controlador_Juego::Disparar_Misil(Keys tecla)
 		for (int i = 1; i <= FlotaMax; i++)
 		{
 			indice[i] = naves[i - 1].first;
-			Peso[i] = naves[i - 1].second.first;
-			Valor[i] = naves[i - 1].second.second;
+			Vida[i] = naves[i - 1].second.first;
+			Material[i] = naves[i - 1].second.second;
 		}
+		teledirigido->Algoritmo(FlotaMax, Vida, Material, indice);
+		vector<int>objetivos = teledirigido->get_NavTel();
+		for (int i = objetivos.size() - 1; i >= 0; i--)
+			Maquina->Calcular_Danio(objetivos[i], 40);
+
+
 		break;
 	}
 	}
@@ -236,4 +242,4 @@ void Controlador_Juego::Disparar_Misil(Keys tecla)
 
 
 
-#endif // !_Controlador_
+#endif // !_Controlador_ // !_Controlador_
