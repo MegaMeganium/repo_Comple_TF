@@ -1,6 +1,9 @@
 #ifndef _MISIL_
 #define _MISIL_
-	
+
+#define VMax 100
+typedef pair<int, int>iPair;
+
 class Misil {
 protected:
 	int x, y,n;
@@ -8,6 +11,7 @@ protected:
 	int danio;
 	string sprite;
 	vector<int>nav;
+	
 
 public:
 	Misil();

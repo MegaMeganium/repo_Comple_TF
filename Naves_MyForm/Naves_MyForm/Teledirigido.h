@@ -5,56 +5,92 @@
 
 class Teledirigido : public Misil
 {
-public:
-	Teledirigido(int danio);
-	~Teledirigido();
-	void Algoritmo(int Vida[], int Material[]);
-	int get_MaterialMax();
-
 private:
 	int MaterialMax;
 	vector<int>navTel;
 
+public:
+	Teledirigido();
+
+	~Teledirigido();
+	void ordenar(vector<pair<int, iPair>>&obj);
+	bool verificar(int j, int temp[], int k);
+	void Algoritmo(int n, int Vida[], int Material[], int indice[]);
+	int get_MaterialMax();
+
+
 };
 
-Teledirigido::Teledirigido(int danio) : Misil::Misil()
-{
-	this->danio = danio;
-}
 
+Teledirigido::Teledirigido() : Misil::Misil()
+{
+
+}
 Teledirigido::~Teledirigido() {}
 
-//Knapsack
-void Teledirigido::Algoritmo(int Vida[], int Material[])
+void Teledirigido::ordenar(vector<pair<int, iPair>>&obj)
 {
-	nav.clear();
-	int *a = new int[100];
-	int *temp = new int[100];
+	pair<int, iPair>aux;
+	for (int i = 0; i<obj.size(); i++)
+		for (int j = i + 1; j<obj.size(); j++)
+
+			if (obj[i].second.first>obj[j].second.first) {
+				aux = obj[i];
+				obj[i] = obj[j];
+				obj[j] = aux;
+
+			}
+}
+
+bool Teledirigido::verificar(int j, int temp[], int k)
+{
+	int in = 0;
+	for (int i = 0; i < k; i++)
+	{
+		if (temp[i] == j)
+			in = 1;
+	}
+	if (in == 1)
+		return false;
+	else
+		return true;
+}
+
+//Knapsack
+void Teledirigido::Algoritmo(int n, int Vida[], int Material[], int indice[])
+{
+	int *a = new int[VMax];
+	int *temp = new int[VMax];
 	int aux;
 
-	for (int i = 0; i <= 100; i++) {
+	for (int i = 0; i <= VMax; i++) {
 		a[i] = 0;
 		temp[i] = -1;
 	}
 
 	a[0] = 0;
-	for (int i = 1; i <= 100; i++)
-		for (int j = 0; j < n; j++)
-			if ((Vida[j] <= i) && (a[i] < a[i - Vida[j]] + Material[j])) {
+	for (int i = 1; i <= VMax; i++)
+		for (int j = 1; j <= n; j++) {
+			if (verificar(j, temp, i) == false)
+				a[i] += Material[j];
+			if ((Vida[j] <= i) && (a[i] < a[i - Vida[j]] + Material[j]) && (verificar(j, temp, i) == true)) {
 				a[i] = a[i - Vida[j]] + Material[j];
 				temp[i] = j;
 			}
+		}
 
-	aux = 100;
-
-	while ((aux > 0) && (temp[aux] != -1)) {
-		navTel.push_back(temp[aux]+1);
+	aux = VMax;
+	int tempM = VMax;
+	while ((aux <= VMax) && (aux>0)) {
+		if (temp[aux] != -1) {
+			navTel.push_back(indice[temp[aux]]);
+			//cout << "Se agrego " << indice[temp[aux]] << " ($" << Material[temp[aux]] << ", " << Vida[temp[aux]] << "Kg) Espacio disponible: " << tempM - Vida[temp[aux]] << endl;
+			//tempM -= Vida[temp[aux]];
+		}
 		aux -= Vida[temp[aux]];
 	}
-	Set_nav(navTel);
-	MaterialMax = a[100];
-
-
+	//cout << "Valor total: $" << a[VMax] << endl;
+	MaterialMax = a[VMax];
 	delete[] temp;
 	delete[] a;
 }
