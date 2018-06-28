@@ -15,6 +15,7 @@ class Controlador_Juego
 private:
 	Jugador *Humano;
 	Jugador *Maquina;
+	int turno;
 //	Rastreador *rastreador;
 	//Jugador **Jugadores;
 public:

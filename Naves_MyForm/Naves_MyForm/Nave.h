@@ -121,8 +121,10 @@ void Nave::Set_tipo(TipoNave tipo)
 	this->vida = this->vida_max;
 	if(tipo==TipoNave::Nodriza)
 		{
-			ancho = 100;
-			largo = 120;
+			ancho = 120;
+			largo = 200;
+			this->sprite = GetSprite(this->tipo, this->bando);
+			y = 0;
 		}
 	else
 		this->sprite = GetSprite(this->tipo, this->bando);
@@ -166,7 +168,6 @@ bool Nave::HayColision(int x, int y)
 {
 	Rectangle obj1 = Rectangle(X_Recalculation(this->x, this->ancho), Y_Recalculation(this->y, this->largo), this->ancho, this->largo);
 	Rectangle obj2 = Rectangle(X_Recalculation(x, ancho), Y_Recalculation(y, largo), ancho, largo);
-
 	return obj1.IntersectsWith(obj2);
 }
 

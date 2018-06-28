@@ -58,6 +58,12 @@ void Jugador::InicializarFlota(Bando bando)
 	}
 }
 
+
+int RandomMaterial(TipoNave tipo)
+	{
+		return tipo == TipoNave::Escudo ? rand() % 100 +100: rand() % 100 ;
+	}
+
 void Jugador::Agregar_Nave(int x, int y, int width, int heighty)
 {
 	/*
@@ -102,6 +108,7 @@ void Jugador::Agregar_Nave(int x, int y, int width, int heighty)
 					Flota[i]->Set_tipo(TipoNave::Cazador);
 				aux_x2 += aux_x;
 				aux_y += (aux_y2 / 3)*ResSum;
+				Flota[i]->Set_material(RandomMaterial(Flota[i]->Get_tipo()));
 			}
 			else
 				{ 
@@ -109,6 +116,7 @@ void Jugador::Agregar_Nave(int x, int y, int width, int heighty)
 	//				Flota[i]->Set_xSprite
 					Flota[i]->Set_estado(EstadoNave::Vivo);
 					Flota[i]->Set_tipo(TipoNave::Nodriza);
+					Flota[i]->Set_material(0);
 				}
 		}
 }
