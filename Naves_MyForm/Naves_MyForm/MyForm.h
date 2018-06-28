@@ -103,7 +103,7 @@ namespace Naves_MyForm {
 		juego->Dibujar_Flota_Enemiga(g->VisibleClipBounds.X,g->VisibleClipBounds.Y,g->VisibleClipBounds.Width, g->VisibleClipBounds.Height);
 	}
 	private: System::Void MyForm_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e) {
-		
+		juego->Disparar_Misil(e->KeyData);
 	}
 	};
 }

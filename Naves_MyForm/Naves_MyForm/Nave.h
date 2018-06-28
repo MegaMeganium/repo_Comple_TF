@@ -150,7 +150,7 @@ void Nave::DibujarNave(Graphics^ g)
 			g->DrawImage(img, xSprite, ySprite, ancho, largo);
 			aux = this->largo;
 		}
-		g->FillRectangle(Brushes::DarkRed, xSprite, ySprite + aux, ancho, 10);
+		g->FillRectangle(Brushes::Blue, xSprite, ySprite + aux, ancho, 10);
 		g->FillRectangle(Brushes::Red, xSprite, ySprite + aux, (int)(b / a * ancho), 10);
 		delete img;
 	}

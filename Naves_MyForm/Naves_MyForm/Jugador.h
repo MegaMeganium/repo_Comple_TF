@@ -6,7 +6,7 @@
 #include "Rastreador.h"
 #include <map>
 
-#define FlotaMax 16
+#define FlotaMax 11
 
 class Jugador
 {
@@ -26,9 +26,12 @@ public:
 	void Calcular_Danio(int id, int danio);
 	void Rehabilitar_Nave();
 	void Cambiar_Estado_Nave();
+	
+
+	Nave** Get_Flota();
 	void DibujarFlota(Graphics^ g, char identificar);
 	bool HayColisionEntreNaves(int x, int y);
-
+	
 };
 
 Jugador::Jugador(Bando bando)
@@ -99,6 +102,7 @@ void Jugador::Calcular_Danio(int id, int danio)
 			Flota[i]->Set_vida(Vida_Actualizada);
 			if (Flota[i]->Get_vida() == 0)
 				Flota[i]->Set_estado(EstadoNave::FueraCombate);
+			break;
 		}
 }
 
@@ -136,6 +140,11 @@ bool Jugador::HayColisionEntreNaves(int x, int y)
 		if (Flota[i]->HayColision(x, y))
 			return true;
 	return false;
+}
+
+Nave** Jugador::Get_Flota()
+{
+	return Flota;
 }
 
 #endif // !_JUGADOR_

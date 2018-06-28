@@ -52,7 +52,7 @@ namespace Helpers
 			return y - (altura / 2);
 		}
 
-		const int GetvidaMax(Estados::TipoNave tipo) 
+		int GetvidaMax(Estados::TipoNave tipo) 
 		{
 			switch (tipo)
 			{

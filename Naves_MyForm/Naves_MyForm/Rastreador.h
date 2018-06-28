@@ -3,25 +3,36 @@
 #include "Misil.h"
 #define INF 9999999
 
+
 class Rastreador: public Misil
 	{
 		private:
 			vector<int> Objetivos;
-			int **distancia;
+			double **distancia;
 			int **reccorrido;
 		public:
-			vector<int> Algoritmo(int **Grafo, int origen, int destino, int V);
+			Rastreador();
+			vector<int> Algoritmo(double **Grafo, int origen, int destino, int V);
 	};
 
+Rastreador::Rastreador()
+	{
+		distancia = new double*[16];
+		reccorrido = new int*[16];
+		for(int i = 0; i < 16; i++)
+			{
+				distancia[i] = new double[16];
+				reccorrido[i] = new int[16];
+			}
+	}
+
 //FloydWarshall
-vector<int> Rastreador::Algoritmo(int **Grafo, int origen, int destino, int V) 
+vector<int> Rastreador::Algoritmo(double **Grafo, int origen, int destino, int V) 
 	{	
-		
-		distancia = new int*[V];
-		reccorrido = new int*[V];
+
 		for(int i = 0; i < V;i++)
 			{
-				distancia[i] = new int[V];
+				distancia[i] = new double[V];
 				reccorrido[i] = new int[V];
 			}
 		for(int i = 0; i < V;i++)
@@ -51,10 +62,6 @@ vector<int> Rastreador::Algoritmo(int **Grafo, int origen, int destino, int V)
 	}
 
 #endif // !_Rastreador_
-
-
-
-
 
 /*
 #ifndef _RASTREADOR_
@@ -96,7 +103,6 @@ Rastreador::Rastreador(int danio) : Misil::Misil()
 		edges[i].v = v;
 		edges[i].w = a.Next(-200,200);
 	}
-
 }
 
 Rastreador::~Rastreador() {}
@@ -108,21 +114,16 @@ void Rastreador::Algoritmo(int src, int dest)
 		d[i] = INFINITY;
 	}
 	d[src] = 0;
-
 	for (int i = 0; i < n; i++) {
 		for (int j = 0; j < EDGES; j++) {
 			if (d[edges[j].u] + edges[j].w < d[edges[j].v]) {
 				if (edges[j].v == dest)
 					navRas.push_back(edges[j].u);
-				d[edges[j].v] = d[edges[j].u] + edges[j].w;
-				
+				d[edges[j].v] = d[edges[j].u] + edges[j].w;		
 			}
-
 		}
 	}
 	Set_nav(navRas);
 }
-
-
 #endif // !_RASTREADOR_
 */

@@ -1,6 +1,6 @@
 #ifndef _MISIL_
 #define _MISIL_
-
+	
 class Misil {
 protected:
 	int x, y,n;
