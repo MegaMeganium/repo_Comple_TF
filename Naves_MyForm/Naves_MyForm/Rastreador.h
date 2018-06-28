@@ -17,12 +17,12 @@ class Rastreador: public Misil
 
 Rastreador::Rastreador()
 	{
-		distancia = new double*[16];
-		reccorrido = new int*[16];
-		for(int i = 0; i < 16; i++)
+		distancia = new double*[11];
+		reccorrido = new int*[11];
+		for(int i = 0; i < 11; i++)
 			{
-				distancia[i] = new double[16];
-				reccorrido[i] = new int[16];
+				distancia[i] = new double[11];
+				reccorrido[i] = new int[11];
 			}
 	}
 

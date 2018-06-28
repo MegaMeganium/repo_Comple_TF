@@ -60,6 +60,7 @@ void Jugador::InicializarFlota(Bando bando)
 
 void Jugador::Agregar_Nave(int x, int y, int width, int heighty)
 {
+	/*
 	int aux_x = width / 8;
 	int aux_x2 = aux_x / 2;
 	int aux_y = heighty - (heighty / 2)-100;
@@ -78,6 +79,37 @@ void Jugador::Agregar_Nave(int x, int y, int width, int heighty)
 				Flota[i]->Set_tipo(TipoNave::Escudo);
 			else
 				Flota[i]->Set_tipo(TipoNave::Cazador);
+		}*/
+	int aux_x = width / 10;
+	int aux_x2 = aux_x / 2;
+	int aux_y = heighty - (heighty / 2) - 100;
+	int aux_y2 = aux_y;
+	int ResSum = -1;
+	for(int i = 0; i < FlotaMax;i++)
+		{
+			if(i!=10)
+			{ 
+				if (i == 5)
+					aux_y = Flota[4]->Get_y();
+				Flota[i]->Set_X_Y(aux_x2, aux_y);
+			
+				if (i == 2 || i == 4 || i==7)
+					ResSum *= -1;
+				Flota[i]->Set_estado(EstadoNave::Vivo);
+				if (i == 1 || i == 3 || i == 6 || i == 8)
+					Flota[i]->Set_tipo(TipoNave::Escudo);
+				else
+					Flota[i]->Set_tipo(TipoNave::Cazador);
+				aux_x2 += aux_x;
+				aux_y += (aux_y2 / 3)*ResSum;
+			}
+			else
+				{ 
+					Flota[i]->Set_X_Y(Flota[4]->Get_x() + aux_x / 2, Flota[2]->Get_y());
+	//				Flota[i]->Set_xSprite
+					Flota[i]->Set_estado(EstadoNave::Vivo);
+					Flota[i]->Set_tipo(TipoNave::Nodriza);
+				}
 		}
 }
 

@@ -18,7 +18,7 @@ private:
 	int id;
 	int x, y, xSprite, ySprite;
 	int vida_max; // auxiliar
-	const int ancho = 65, largo = 80;
+	int ancho = 65, largo = 80;
 	int vida;
 	int material;
 	TipoNave tipo;
@@ -119,7 +119,13 @@ void Nave::Set_tipo(TipoNave tipo)
 	this->tipo = tipo;
 	this->vida_max = GetvidaMax(this->tipo);
 	this->vida = this->vida_max;
-	this->sprite = GetSprite(this->tipo, this->bando);
+	if(tipo==TipoNave::Nodriza)
+		{
+			ancho = 100;
+			largo = 120;
+		}
+	else
+		this->sprite = GetSprite(this->tipo, this->bando);
 }
 void Nave::Set_estado(EstadoNave estado) { this->estado = estado; }
 /*
