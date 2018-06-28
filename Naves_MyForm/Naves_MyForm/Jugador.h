@@ -123,11 +123,24 @@ void Jugador::Agregar_Nave(int x, int y, int width, int heighty)
 
 void Jugador::PosicionarNave(int x, int y, MouseButtons button)
 {
-	if (!(contadorFlota < FlotaMax) || HayColisionEntreNaves(x, y)) return;
-	Flota[contadorFlota]->Set_X_Y(x, y);
-	Flota[contadorFlota]->Set_estado(EstadoNave::Vivo);
-	Flota[contadorFlota]->Set_tipo(MouseButtons::Left == button? TipoNave::Cazador : TipoNave::Escudo);
-	contadorFlota++;
+	if (!(contadorFlota < FlotaMax) || HayColisionEntreNaves(x, y)) 
+		return;
+	if(contadorFlota ==10)
+		{
+			Flota[contadorFlota]->Set_X_Y(x, y);
+			Flota[contadorFlota]->Set_estado(EstadoNave::Vivo);
+			Flota[contadorFlota]->Set_tipo(TipoNave::Nodriza);
+			Flota[contadorFlota]->Set_material(0);
+			contadorFlota++;
+		}
+	else
+		{ 
+			Flota[contadorFlota]->Set_X_Y(x, y);
+			Flota[contadorFlota]->Set_estado(EstadoNave::Vivo);
+			Flota[contadorFlota]->Set_tipo(MouseButtons::Left == button? TipoNave::Cazador : TipoNave::Escudo);
+			Flota[contadorFlota]->Set_material(RandomMaterial(Flota[contadorFlota]->Get_tipo()));
+			contadorFlota++;
+		}
 }
 
 void Jugador::Calcular_Danio(int id, int danio)
