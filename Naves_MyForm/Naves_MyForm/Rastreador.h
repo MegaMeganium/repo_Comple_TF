@@ -19,11 +19,11 @@ Rastreador::Rastreador()
 	{
 		distancia = new double*[11];
 		reccorrido = new int*[11];
-		for(int i = 0; i < 11; i++)
+/*		for(int i = 0; i < 11; i++)
 			{
 				distancia[i] = new double[11];
 				reccorrido[i] = new int[11];
-			}
+			}*/
 	}
 
 //FloydWarshall
@@ -41,6 +41,7 @@ vector<int> Rastreador::Algoritmo(double **Grafo, int origen, int destino, int V
 					distancia[i][j] = Grafo[i][j];
 					reccorrido[i][j] = i != j && Grafo[i][j] != INF ? i : -1;
 				}
+
 		for(int k = 0;k < V;k++)
 			for(int i= 0; i < V; i++)
 				for(int j= 0; j < V; j++)

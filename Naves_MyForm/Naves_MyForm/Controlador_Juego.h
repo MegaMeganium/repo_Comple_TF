@@ -150,16 +150,17 @@ void Controlador_Juego::Disparar_Misil(Keys tecla)
 		int *indice = new int[FlotaMax];
 		for (int i = 0; i < FlotaMax; i++)
 		{
+			if(Flota[i]->Get_vida()!=0)
 			naves.push_back({ i,{ Flota[i]->Get_vida(),Flota[i]->Get_material() } });
 		}
 		teledirigido->ordenar(naves);
-		for (int i = 1; i <= FlotaMax; i++)
+		for (int i = 1; i <= naves.size(); i++)
 		{
 			indice[i] = naves[i - 1].first;
 			Vida[i] = naves[i - 1].second.first;
 			Material[i] = naves[i - 1].second.second;
 		}
-		teledirigido->Algoritmo(FlotaMax, Vida, Material, indice);
+		teledirigido->Algoritmo(naves.size(), Vida, Material, indice);
 		vector<int>objetivos = teledirigido->get_NavTel();
 		for (int i = objetivos.size() - 1; i >= 0; i--)
 			Maquina->Calcular_Danio(objetivos[i], 40);
