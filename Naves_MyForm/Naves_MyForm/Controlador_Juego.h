@@ -19,6 +19,7 @@ private:
 	Nave** Flota; //Maquina
 	Nave** Flota2;//Humano
 	int turno = 0;
+	int ganador = 0;
 	//Rastreador *rastreador;
 	//Jugador **Jugadores;
 public:
@@ -27,6 +28,7 @@ public:
 
 	Jugador* GetHumano();
 	Jugador* GetMaquina();
+	int get_ganador();
 	void Dibujar_Flota_Enemiga(int x, int y, int width, int height);
 	void TimerTick(Graphics^ g);
 	void Disparar_Misil(Keys tecla);
@@ -71,6 +73,17 @@ void Controlador_Juego::TimerTick(Graphics^ g)
 		else
 			Disparar_Misil_Maquina_Teledirigido();
 	}
+	for (int i = 0;i<FlotaMax;i++) {
+		if (Flota[i]->Get_id() == 10 && Flota[i]->Get_vida() == 0)
+			ganador = 1;
+		else if (Flota2[i]->Get_id() == 10 && Flota2[i]->Get_vida() == 0) {
+			ganador = 2;
+		}
+		else if (Flota2[i]->Get_id() == 10 && Flota2[i]->Get_vida() == 0 && 1) {
+			ganador = 2;
+		}
+	}
+	
 
 
 }
@@ -148,8 +161,9 @@ void Controlador_Juego::Disparar_Misil(Keys tecla)
 		else
 			objetivos.push_back(10);
 		//		vector<int> objetivos = DevolverRatreador(Maquina->Get_Flota());
+
 		for (int i = objetivos.size() - 1; i >= 0; i--)
-			Maquina->Calcular_Danio(objetivos[i], 30);
+			Maquina->Calcular_Danio(objetivos[i], -30);
 		break;
 	}
 	case Keys::E:
@@ -166,7 +180,8 @@ void Controlador_Juego::Disparar_Misil(Keys tecla)
 			objetivos.push_back(10);
 		//		vector<int> objetivos = DevolverRatreador(Maquina->Get_Flota());
 		for (int i = objetivos.size() - 1; i >= 0; i--)
-			Maquina->Calcular_Danio(objetivos[i], 40);
+			Maquina->Calcular_Danio(objetivos[i], -40);
+
 
 
 		break;
@@ -188,6 +203,8 @@ void Controlador_Juego::Disparar_Misil_Maquina_Rastreador()
 
 	for (int i = objetivos.size() - 1; i >= 0; i--)
 		Humano->Calcular_Danio(objetivos[i], 30);
+
+	
 
 }
 void Controlador_Juego::Disparar_Misil_Maquina_Teledirigido()
@@ -275,7 +292,7 @@ vector<int> Controlador_Juego::DevolverTeledirigido(Nave** Flota)
 		if (Flota[i]->Get_vida()>0)
 			naves.push_back({ Flota[i]->Get_id(),{ Flota[i]->Get_vida(),Flota[i]->Get_material() } });
 	}
-	teledirigido->ordenar(naves);
+	teledirigido->heapSort(naves,naves.size());
 	for (int i = 1; i <= naves.size(); i++)
 	{
 		indice[i] = naves[i - 1].first;
@@ -286,6 +303,10 @@ vector<int> Controlador_Juego::DevolverTeledirigido(Nave** Flota)
 
 	vector<int>objetivos = teledirigido->get_NavTel();
 	return objetivos;
+}
+
+int Controlador_Juego::get_ganador() {
+	return this->ganador;
 }
 
 #endif // !_Controlador_ // !_Controlador_

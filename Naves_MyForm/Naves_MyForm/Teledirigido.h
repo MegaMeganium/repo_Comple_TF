@@ -14,6 +14,8 @@ public:
 
 	~Teledirigido();
 	void ordenar(vector<pair<int, iPair>>&obj);
+	void heapify(vector<pair<int, iPair>>&obj, int n, int i);
+	void heapSort(vector<pair<int, iPair>>&obj, int n);
 	bool verificar(int j, int temp[], int k);
 	void Algoritmo(int n, int Vida[], int Material[], int indice[]);
 	int get_MaterialMax();
@@ -42,7 +44,37 @@ void Teledirigido::ordenar(vector<pair<int, iPair>>&obj)
 
 			}
 }
+void Teledirigido::heapify(vector<pair<int, iPair>>&obj, int n, int i)
+{
+	int largest = i;  
+	int l = 2 * i + 1;  
+	int r = 2 * i + 2;  
 
+	if (l < n && obj[l].second.first> obj[largest].second.first)
+		largest = l;
+
+	if (r < n && obj[r].second.first > obj[largest].second.first)
+		largest = r;
+
+	if (largest != i)
+	{
+		swap(obj[i], obj[largest]);
+
+		heapify(obj, n, largest);
+	}
+}
+void Teledirigido::heapSort(vector<pair<int, iPair>>&obj, int n)
+{
+	for (int i = n / 2 - 1; i >= 0; i--)
+		heapify(obj, n, i);
+
+	for (int i = n - 1; i >= 0; i--)
+	{
+		swap(obj[0], obj[i]);
+
+		heapify(obj, i, 0);
+	}
+}
 bool Teledirigido::verificar(int j, int temp[], int k)
 {
 	int in = 0;
