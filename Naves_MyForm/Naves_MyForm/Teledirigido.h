@@ -17,7 +17,7 @@ public:
 	void heapify(vector<pair<int, iPair>>&obj, int n, int i);
 	void heapSort(vector<pair<int, iPair>>&obj, int n);
 	bool verificar(int j, int temp[], int k);
-	void Algoritmo(int n, int Vida[], int Material[], int indice[]);
+	void Algoritmo(vector<pair<int, iPair>>&obj);
 	int get_MaterialMax();
 	vector<int>get_NavTel();
 
@@ -46,9 +46,9 @@ void Teledirigido::ordenar(vector<pair<int, iPair>>&obj)
 }
 void Teledirigido::heapify(vector<pair<int, iPair>>&obj, int n, int i)
 {
-	int largest = i;  
-	int l = 2 * i + 1;  
-	int r = 2 * i + 2;  
+	int largest = i;
+	int l = 2 * i + 1;
+	int r = 2 * i + 2;
 
 	if (l < n && obj[l].second.first> obj[largest].second.first)
 		largest = l;
@@ -90,8 +90,9 @@ bool Teledirigido::verificar(int j, int temp[], int k)
 }
 
 //Knapsack
-void Teledirigido::Algoritmo(int n, int Vida[], int Material[], int indice[])
+void Teledirigido::Algoritmo(vector<pair<int, iPair>>&obj)
 {
+	heapSort(obj, obj.size());
 	navTel.clear();
 	int *a = new int[VMax + 1];
 	int *temp = new int[VMax + 1];
@@ -104,18 +105,18 @@ void Teledirigido::Algoritmo(int n, int Vida[], int Material[], int indice[])
 
 	a[0] = 0;
 	for (int i = 1; i <= VMax; i++)
-		for (int j = 1; j <= n; j++) {
+		for (int j = 0; j < obj.size(); j++) {
 			int sum = 0;
 			if (verificar(j, temp, i) == false)
-				a[i] += Material[j];
-			if ((Vida[j] <= i) && (a[i] < a[i - Vida[j]] + Material[j]) && (verificar(j, temp, i) == true)) {
-				a[i] = a[i - Vida[j]] + Material[j];
+				a[i] += obj[j].second.second;
+			if ((obj[j].second.first <= i) && (a[i] < a[i - obj[j].second.first] + obj[j].second.second) && (verificar(j, temp, i) == true)) {
+				a[i] = a[i - obj[j].second.first] + obj[j].second.second;
 				temp[i] = j;
 			}
 			for (int k = 1; k <= n; k++) {
 				if (verificar(k, temp, i) == false)
 				{
-					sum += Material[k];
+					sum += obj[k].second.second;
 					a[i + 1] = sum;
 				}
 			}
@@ -124,8 +125,8 @@ void Teledirigido::Algoritmo(int n, int Vida[], int Material[], int indice[])
 	aux = VMax;
 	while ((aux <= VMax) && (aux>0)) {
 		if (temp[aux] != -1) {
-			navTel.push_back(indice[temp[aux]]);
-			aux -= Vida[temp[aux]];
+			navTel.push_back(obj[temp[aux]].first);
+			aux -= obj[temp[aux]].second.first;
 			//cout << "Se agrego " << indice[temp[aux]] << " ($" << Material[temp[aux]] << ", " << Vida[temp[aux]] << "Kg) Espacio disponible: " << tempM - Vida[temp[aux]] << endl;
 			//tempM -= Vida[temp[aux]];
 		}

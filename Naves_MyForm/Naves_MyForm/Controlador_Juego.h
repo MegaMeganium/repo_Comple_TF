@@ -73,7 +73,7 @@ void Controlador_Juego::TimerTick(Graphics^ g)
 		else
 			Disparar_Misil_Maquina_Teledirigido();
 	}
-	for (int i = 0;i<FlotaMax;i++) {
+	for (int i = 0; i<FlotaMax; i++) {
 		if (Flota[i]->Get_id() == 10 && Flota[i]->Get_vida() == 0)
 			ganador = 1;
 		else if (Flota2[i]->Get_id() == 10 && Flota2[i]->Get_vida() == 0) {
@@ -83,7 +83,7 @@ void Controlador_Juego::TimerTick(Graphics^ g)
 			ganador = 2;
 		}
 	}
-	
+
 
 
 }
@@ -169,28 +169,9 @@ void Controlador_Juego::Disparar_Misil(Keys tecla)
 	case Keys::E:
 	{
 		turno++;
-		vector<pair<int, iPair>>naves;
 		vector<int> objetivos;
-		int *indice;
-		int *Vida;
-		int *Material;
 		int contador = 0;
 		for (int i = 0; i < FlotaMax; i++)
-
-		{
-			if(Flota[i]->Get_vida()!=0)
-			naves.push_back({ i,{ Flota[i]->Get_vida(),Flota[i]->Get_material() } });
-		}
-		teledirigido->ordenar(naves);
-		for (int i = 0; i < naves.size(); i++)
-		{
-			indice[i] = naves[i - 1].first;
-			Vida[i] = naves[i - 1].second.first;
-			Material[i] = naves[i - 1].second.second;
-		}
-		teledirigido->Algoritmo(naves.size(), Vida, Material, indice);
-		vector<int>objetivos;
-		for(int i = 0; i <FlotaMax;i++)
 			if (Flota[i]->Get_vida() == 0)
 				contador++;
 		if (contador != 10)
@@ -200,6 +181,8 @@ void Controlador_Juego::Disparar_Misil(Keys tecla)
 		//		vector<int> objetivos = DevolverRatreador(Maquina->Get_Flota());
 		for (int i = objetivos.size() - 1; i >= 0; i--)
 			Maquina->Calcular_Danio(objetivos[i], -40);
+
+
 
 		break;
 	}
@@ -221,7 +204,7 @@ void Controlador_Juego::Disparar_Misil_Maquina_Rastreador()
 	for (int i = objetivos.size() - 1; i >= 0; i--)
 		Humano->Calcular_Danio(objetivos[i], 30);
 
-	
+
 
 }
 void Controlador_Juego::Disparar_Misil_Maquina_Teledirigido()
@@ -301,23 +284,12 @@ vector<int> Controlador_Juego::DevolverTeledirigido(Nave** Flota)
 {
 	Teledirigido *teledirigido = new Teledirigido();
 	vector<pair<int, iPair>>naves;
-	int *Vida = new int[FlotaMax];
-	int *Material = new int[FlotaMax];
-	int *indice = new int[FlotaMax];
 	for (int i = 0; i < FlotaMax; i++)
 	{
 		if (Flota[i]->Get_vida()>0)
 			naves.push_back({ Flota[i]->Get_id(),{ Flota[i]->Get_vida(),Flota[i]->Get_material() } });
 	}
-	teledirigido->heapSort(naves,naves.size());
-	for (int i = 1; i <= naves.size(); i++)
-	{
-		indice[i] = naves[i - 1].first;
-		Vida[i] = naves[i - 1].second.first;
-		Material[i] = naves[i - 1].second.second;
-	}
-	teledirigido->Algoritmo(naves.size(), Vida, Material, indice);
-
+	teledirigido->Algoritmo(naves);
 	vector<int>objetivos = teledirigido->get_NavTel();
 	return objetivos;
 }
