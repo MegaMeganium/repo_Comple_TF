@@ -97,6 +97,8 @@ namespace Naves_MyForm {
 		bg->Graphics->DrawImage(fondo, g->VisibleClipBounds);
 		juego->TimerTick(bg->Graphics);
 		bg->Render(g);
+		
+
 	}
 	private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e) {
 		srand(time(NULL));
@@ -104,6 +106,12 @@ namespace Naves_MyForm {
 	}
 	private: System::Void MyForm_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e) {
 		juego->Disparar_Misil(e->KeyData);
+		if (juego->get_ganador() == 1)
+			MessageBox::Show("Ganaste");
+		else if (juego->get_ganador() == 2)
+			MessageBox::Show("Derrota");
+		else if (juego->get_ganador() == 3)
+			MessageBox::Show("Empate");
 	}
 	};
 }

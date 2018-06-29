@@ -51,11 +51,12 @@ Jugador::~Jugador()
 void Jugador::InicializarFlota(Bando bando)
 {
 	Flota = new Nave*[FlotaMax];
-	for (auto i = 0; i < FlotaMax; i++)
+	for (int i = 0; i < FlotaMax; i++)
 	{
 		Flota[i] = new Nave(bando);
 		Flota[i]->Set_Id(i);
 	}
+	int u = 0;
 }
 
 
@@ -146,10 +147,13 @@ void Jugador::PosicionarNave(int x, int y, MouseButtons button)
 void Jugador::Calcular_Danio(int id, int danio)
 {
 	int Vida_Actualizada = 0;
-	for (int i = 0; i < FlotaMax; i++)
+	for (int i = 0; i < FlotaMax; i++) {
+		Vida_Actualizada = 0;
 		if (Flota[i]->Get_id() == id)
 		{
-			Vida_Actualizada = Flota[i]->Get_vida() - danio;
+			Vida_Actualizada = 0;
+			int auxVid = Flota[i]->Get_vida();
+			Vida_Actualizada = auxVid + danio;
 			if (Vida_Actualizada < 0)
 				Vida_Actualizada = 0;
 			Flota[i]->Set_vida(Vida_Actualizada);
@@ -157,6 +161,7 @@ void Jugador::Calcular_Danio(int id, int danio)
 				Flota[i]->Set_estado(EstadoNave::FueraCombate);
 			break;
 		}
+	}
 }
 
 void Jugador::Rehabilitar_Nave()

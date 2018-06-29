@@ -76,7 +76,7 @@ Nave::Nave(int id, int x, int y, TipoNave tipo, Bando bando)
 	this->id = id;
 	this->x = x;
 	this->y = y;
-	this->vida = this->vida_max;
+	//this->vida;
 	this->material = 0;
 	this->tipo = tipo;
 	this->estado = EstadoNave::FueraCombate;
@@ -118,16 +118,15 @@ void Nave::Set_tipo(TipoNave tipo)
 { 
 	this->tipo = tipo;
 	this->vida_max = GetvidaMax(this->tipo);
-	this->vida = this->vida_max;
+	this->vida = this->vida_max + 0;
 	if(tipo==TipoNave::Nodriza)
 		{
 			ancho = 120;
 			largo = 200;
-			this->sprite = GetSprite(this->tipo, this->bando);
+			//this->sprite = GetSprite(this->tipo, this->bando);
 			y = 0;
 		}
-	else
-		this->sprite = GetSprite(this->tipo, this->bando);
+	this->sprite = GetSprite(this->tipo, this->bando);
 }
 void Nave::Set_estado(EstadoNave estado) { this->estado = estado; }
 /*
