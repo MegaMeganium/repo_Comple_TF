@@ -13,7 +13,6 @@ public:
 	Teledirigido();
 
 	~Teledirigido();
-	void ordenar(vector<pair<int, iPair>>&obj);
 	void heapify(vector<pair<int, iPair>>&obj, int n, int i);
 	void heapSort(vector<pair<int, iPair>>&obj, int n);
 	bool verificar(int j, int temp[], int k);
