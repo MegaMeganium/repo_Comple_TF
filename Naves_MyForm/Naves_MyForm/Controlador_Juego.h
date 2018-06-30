@@ -255,23 +255,6 @@ vector<int> Controlador_Juego::DevolverRatreador(Nave** Flota)
 	for (int i = 0; i < FlotaMax; i++)
 		for (int j = 0; j < FlotaMax; j++)
 			Grafo[i][j] = 0;
-	/*
-	for (int i = 0; i < FlotaMax; i++)
-	for (int j = 0; j < FlotaMax; j++)
-	Grafo[i][j] = Flota[j]->Get_vida() != 0 && i != j/* &&
-	(Flota[j]->Get_y() !=  Flota[i]->Get_y()) &&(Flota[j]->Get_x() != Flota[i]->Get_x()) *//* ?
-	double(((Flota[j]->Get_y() - Flota[i]->Get_y())*((Flota[j]->Get_y() < Flota[i]->Get_y() ? -1 : 1))))
-	/ double((Flota[j]->Get_x() - Flota[i]->Get_x())*((Flota[j]->Get_x() < Flota[i]->Get_x() ? -1 : 1)))
-	: INF;
-	*/
-	/*
-	for (int i = 0; i < FlotaMax; i++)
-	for (int j = 0; j < FlotaMax; j++)
-	Grafo[i][j] = Flota[j]->Get_vida() != 0 && i != j ?
-	double(((Flota[j]->Get_y() - Flota[i]->Get_y())*((Flota[j]->Get_y() < Flota[i]->Get_y() ? -1 : 1))))
-	+ double((Flota[j]->Get_x() - Flota[i]->Get_x())*((Flota[j]->Get_x() < Flota[i]->Get_x() ? -1 : 1)))
-	: INF;
-	*/
 
 	for (int i = 0; i < FlotaMax; i++)
 		for (int j = 0; j < FlotaMax; j++)

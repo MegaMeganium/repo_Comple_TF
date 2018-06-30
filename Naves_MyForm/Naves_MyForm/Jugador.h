@@ -113,6 +113,7 @@ void Jugador::Agregar_Nave(int x, int y, int width, int heighty)
 			}
 			else
 				{ 
+					Flota[i]->Set_Id(10);
 					Flota[i]->Set_X_Y(Flota[4]->Get_x() + aux_x / 2, Flota[2]->Get_y());
 	//				Flota[i]->Set_xSprite
 					Flota[i]->Set_estado(EstadoNave::Vivo);
@@ -145,24 +146,17 @@ void Jugador::PosicionarNave(int x, int y, MouseButtons button)
 }
 
 void Jugador::Calcular_Danio(int id, int danio)
-{
-	int Vida_Actualizada = 0;
-	for (int i = 0; i < FlotaMax; i++) {
-		Vida_Actualizada = 0;
-		if (Flota[i]->Get_id() == id)
-		{
+	{
+			int Vida_Actualizada = 0;
 			Vida_Actualizada = 0;
-			int auxVid = Flota[i]->Get_vida();
+			int auxVid = Flota[id]->Get_vida();
 			Vida_Actualizada = auxVid + danio;
 			if (Vida_Actualizada < 0)
 				Vida_Actualizada = 0;
-			Flota[i]->Set_vida(Vida_Actualizada);
-			if (Flota[i]->Get_vida() == 0)
-				Flota[i]->Set_estado(EstadoNave::FueraCombate);
-			break;
-		}
+			Flota[id]->Set_vida(Vida_Actualizada);
+			if (Flota[id]->Get_vida() == 0)
+				Flota[id]->Set_estado(EstadoNave::FueraCombate);	
 	}
-}
 
 void Jugador::Rehabilitar_Nave()
 {
