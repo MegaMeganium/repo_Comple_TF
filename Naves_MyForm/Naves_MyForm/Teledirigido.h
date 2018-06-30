@@ -31,23 +31,10 @@ Teledirigido::Teledirigido() : Misil::Misil()
 }
 Teledirigido::~Teledirigido() {}
 
-void Teledirigido::ordenar(vector<pair<int, iPair>>&obj)
-{
-	pair<int, iPair>aux;
-	for (int i = 0; i<obj.size(); i++)
-		for (int j = i + 1; j<obj.size(); j++)
-
-			if (obj[i].second.first>obj[j].second.first) {
-				aux = obj[i];
-				obj[i] = obj[j];
-				obj[j] = aux;
-
-			}
-}
 void Teledirigido::heapify(vector<pair<int, iPair>>&obj, int n, int i)
 {
 	int largest = i;
-	int l = 2 * i + 1;
+	int l = 2 * i + 1; 
 	int r = 2 * i + 2;
 
 	if (l < n && obj[l].second.first> obj[largest].second.first)
@@ -94,8 +81,8 @@ void Teledirigido::Algoritmo(vector<pair<int, iPair>>&obj)
 {
 	heapSort(obj, obj.size());
 	navTel.clear();
-	int *a = new int[VMax + 1];
-	int *temp = new int[VMax + 1];
+	int *a = new int[VMax + 1]; 
+	int *temp = new int[VMax + 1]; 
 	int aux;
 
 	for (int i = 0; i <= VMax; i++) {
